@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/* Groupe */
+
+Route::get('Groupe', function () {
+    return view('Groupe.index');
+});
+
+Route::post('/Group/AddGroup', 'GroupeController@AddGroupe');
+Route::post('/Group/AlreadyExist', 'GroupeController@AlreadyExist');
