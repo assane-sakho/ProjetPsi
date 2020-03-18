@@ -19,9 +19,13 @@ Route::get('/', function () {
 
 /* Groupe */
 
-Route::get('Groupe', function () {
-    return view('Groupe.index');
+Route::get('Group', function () {
+    return view('group.index');
+});
+Route::get('GroupInfo', function () {
+    return view('groupInfo.index');
 });
 
-Route::post('/Group/AddGroup', 'GroupeController@AddGroupe');
-Route::post('/Group/AlreadyExist', 'GroupeController@AlreadyExist');
+
+Route::post('/Group/AddGroup', 'GroupController@AddGroupe');
+Route::post('/Group/AlreadyExist', 'GroupController@AlreadyExist');

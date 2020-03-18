@@ -1,23 +1,24 @@
-<head>
+@extends('layout.mainlayout')
 
-</head>
-<table class="table">
-    <thead>
-        <tr>Id</tr>
-        <tr>Libelle</tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-<div>
+@section('content')
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>Id</tr>
+            <tr>Libelle</tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
     <form action="" id="form">
         @csrf
         <input type="text" name="groupeName">
         <button id="btnSubmit">sumbit</button>
     </form>
-
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+@endsection
+
+@section('scripts')
 <script>
     $(document).ready(function(){
         
@@ -50,3 +51,5 @@
     });
 
 </script>
+@endsection
+
