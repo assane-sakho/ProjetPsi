@@ -23,7 +23,7 @@ class People extends Migration
             $table->unsignedBigInteger('status_id');
 
             $table->foreign('directory_id')->references('id')->on('directories');
-            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('status_id')->references('id')->on('Statuses');
         });
     }
 
