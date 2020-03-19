@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    protected $table = 'group';
+    protected $table = 'person';
     protected $primaryKey = 'id';
-    protected $fillable = ['name'];
+    protected $fillable = ['lastname','firstname','email','num','directoryId','statusId'];
     protected $guarded = 'id';
     public $timestamps = false;
 }

@@ -8,9 +8,11 @@ use phpDocumentor\Reflection\Types\Array_;
 
 class PersonController extends Controller
 {
+        
     function GetPartial()
     {
-        $data = ["a" => "az"];
-        return view("person/partial", $data);
+        $persons = Person::all();
+      
+        return view('person.partial')->with(compact('persons'));
     }
 }
