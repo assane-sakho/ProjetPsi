@@ -12,7 +12,7 @@
 <script>
     $(document).ready(function()
     {
-        setPage('GroupInfo');
+        setPage('Group');
     });
 
     function setPage(page)

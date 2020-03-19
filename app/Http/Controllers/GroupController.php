@@ -29,7 +29,8 @@ class GroupController extends Controller
     
     function GetPartial()
     {
-        $data = ["a" => "az"];
-        return view("group/partial", $data);
+        $groups = Group::all();
+      
+        return view('group.partial')->with(compact('groups'));
     }
 }
