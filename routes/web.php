@@ -14,18 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 /* Groupe */
 
-Route::get('Group', function () {
-    return view('group.index');
-});
-Route::get('GroupInfo', function () {
-    return view('groupInfo.index');
-});
-
-
 Route::post('/Group/AddGroup', 'GroupController@AddGroupe');
 Route::post('/Group/AlreadyExist', 'GroupController@AlreadyExist');
+
+Route::get('/GroupInfo/GetPartial', 'GroupInfoController@GetPartial');
+Route::get('/Group/GetPartial', 'GroupController@GetPartial');
+Route::get('/Person/GetPartial', 'PersonController@GetPartial');
+Route::get('/API/GetPartial', 'APIController@GetPartial');

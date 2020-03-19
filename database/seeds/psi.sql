@@ -1,95 +1,126 @@
-/*
- Navicat Premium Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 4.1.4
+-- http://www.phpmyadmin.net
+--
+-- Client :  127.0.0.1
+-- Généré le :  Jeu 19 Mars 2020 à 10:22
+-- Version du serveur :  5.6.15-log
+-- Version de PHP :  5.5.8
 
- Source Server         : psi
- Source Server Type    : MySQL
- Source Server Version : 50615
- Source Host           : localhost:3306
- Source Schema         : psi
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
- Target Server Type    : MySQL
- Target Server Version : 50615
- File Encoding         : 65001
 
- Date: 18/03/2020 21:32:59
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+--
+-- Base de données :  `gfgfg`
+--
 
--- ----------------------------
--- Table structure for directory
--- ----------------------------
-DROP TABLE IF EXISTS `directory`;
-CREATE TABLE `directory`  (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `directory`
+--
+
+CREATE TABLE IF NOT EXISTS `directory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=1 ;
 
--- ----------------------------
--- Table structure for group
--- ----------------------------
-DROP TABLE IF EXISTS `group`;
-CREATE TABLE `group`  (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `group`
+--
+
+CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+  UNIQUE KEY `name` (`name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=1 ;
 
--- ----------------------------
--- Table structure for group_person_year
--- ----------------------------
-DROP TABLE IF EXISTS `group_person_year`;
-CREATE TABLE `group_person_year`  (
-  `groupeId` int(11) NULL DEFAULT NULL,
-  `personId` int(11) NULL DEFAULT NULL,
-  `year` int(4) NULL DEFAULT NULL,
-  INDEX `groupeId`(`groupeId`) USING BTREE,
-  INDEX `personId`(`personId`) USING BTREE,
-  INDEX `year`(`year`) USING BTREE,
-  CONSTRAINT `group_person_year_ibfk_1` FOREIGN KEY (`groupeId`) REFERENCES `group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `group_person_year_ibfk_2` FOREIGN KEY (`personId`) REFERENCES `person` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `group_person_year_ibfk_3` FOREIGN KEY (`year`) REFERENCES `school_year` (`YEAR`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for person
--- ----------------------------
-DROP TABLE IF EXISTS `person`;
-CREATE TABLE `person`  (
+--
+-- Structure de la table `group_person_year`
+--
+
+CREATE TABLE IF NOT EXISTS `group_person_year` (
+  `groupeId` int(11) DEFAULT NULL,
+  `personId` int(11) DEFAULT NULL,
+  `year` int(4) DEFAULT NULL,
+  KEY `groupeId` (`groupeId`) USING BTREE,
+  KEY `personId` (`personId`) USING BTREE,
+  KEY `year` (`year`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `person`
+--
+
+CREATE TABLE IF NOT EXISTS `person` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `firstname` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `num` int(11) NULL DEFAULT NULL,
-  `directoryId` int(11) NULL DEFAULT NULL,
-  `statusId` int(11) NULL DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `num` int(11) DEFAULT NULL,
+  `directoryId` int(11) DEFAULT NULL,
+  `statusId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `status`(`statusId`) USING BTREE,
-  INDEX `directoryId`(`directoryId`) USING BTREE,
-  CONSTRAINT `person_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `person_ibfk_2` FOREIGN KEY (`directoryId`) REFERENCES `directory` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+  KEY `status` (`statusId`) USING BTREE,
+  KEY `directoryId` (`directoryId`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=1 ;
 
--- ----------------------------
--- Table structure for school_year
--- ----------------------------
-DROP TABLE IF EXISTS `school_year`;
-CREATE TABLE `school_year`  (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `school_year`
+--
+
+CREATE TABLE IF NOT EXISTS `school_year` (
   `year` int(4) NOT NULL,
   PRIMARY KEY (`year`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- ----------------------------
--- Table structure for status
--- ----------------------------
-DROP TABLE IF EXISTS `status`;
-CREATE TABLE `status`  (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `status`
+--
+
+CREATE TABLE IF NOT EXISTS `status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=1 ;
 
-SET FOREIGN_KEY_CHECKS = 1;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `group_person_year`
+--
+ALTER TABLE `group_person_year`
+  ADD CONSTRAINT `group_person_year_ibfk_1` FOREIGN KEY (`groupeId`) REFERENCES `group` (`id`),
+  ADD CONSTRAINT `group_person_year_ibfk_2` FOREIGN KEY (`personId`) REFERENCES `person` (`id`),
+  ADD CONSTRAINT `group_person_year_ibfk_3` FOREIGN KEY (`year`) REFERENCES `school_year` (`YEAR`);
+
+--
+-- Contraintes pour la table `person`
+--
+ALTER TABLE `person`
+  ADD CONSTRAINT `person_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`id`),
+  ADD CONSTRAINT `person_ibfk_2` FOREIGN KEY (`directoryId`) REFERENCES `directory` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

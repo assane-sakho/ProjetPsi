@@ -1,18 +1,13 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
 
-<title>PSI Project</title>
+    <title>PSI Project</title>
 
-<!-- Bootstrap core CSS -->
-
-<link rel="stylesheet" 
-href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-crossorigin="anonymous">
-
-<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" />
-
-<!-- Custom styles for this template -->
-
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datatables.css') }}" rel="stylesheet">
+  </head>

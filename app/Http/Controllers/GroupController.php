@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\AjaxCrud;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Array_;
 
@@ -24,5 +25,11 @@ class GroupController extends Controller
     {
         $groupe = Group::create(['name' => $request->input("groupeName")]);
         return true;
+    }
+    
+    function GetPartial()
+    {
+        $data = ["a" => "az"];
+        return view("group/partial", $data);
     }
 }
