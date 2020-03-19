@@ -1,27 +1,31 @@
-<head>
-
-</head>
-<table class="table">
+<button class="btn btn-success" id="btnAdd">Ajouter</button></p>
+<form action="" id="form">
+    @csrf
+    <input type="text" name="groupeName">
+    <button id="btnSubmit">sumbit</button>
+</form>
+</p>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
     <thead>
-        <tr>Id</tr>
-        <tr>Libelle</tr>
+      <tr>
+        <th>#</th>
+        <th>Nom du groupe</th>
+      </tr>
     </thead>
     <tbody>
+    @foreach ($groups as $group)
+      <tr>
+          <td>{{ $group->id }}</td>
+          <td>{{ $group->name }}</td>
+      </tr>
+    @endforeach
     </tbody>
-</table>
-<div>
-    <form action="" id="form">
-        @csrf
-        <input type="text" name="groupeName">
-        <button id="btnSubmit">sumbit</button>
-    </form>
-
+  </table>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
 <script>
-    $(document).ready(function(){
-        
-    });
+    $("table").DataTable();
 
     function checkIfExist(){
         return $.ajax({

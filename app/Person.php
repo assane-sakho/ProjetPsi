@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Groupe extends Model
+class Person extends Model
 {
-    protected $table = 'groupe';
+    protected $table = 'person';
     protected $primaryKey = 'id';
-    protected $fillable = ['NOM'];
+    protected $fillable = ['lastname','firstname','email','num','directoryId','statusId'];
     protected $guarded = 'id';
     public $timestamps = false;
 }
