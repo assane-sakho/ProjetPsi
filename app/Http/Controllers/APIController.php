@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Array_;
 
 class APIController extends Controller
 {
-    function GetPartial()
+    function getPartial()
     {
-        $data = ["a" => "az"];
-        return view("api/partial", $data);
+        return view('api.partial');
     }
 }
