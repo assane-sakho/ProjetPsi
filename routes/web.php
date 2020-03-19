@@ -2,26 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-/* Groupe */
+/* Group */
+Route::get('/Group/GetPartial', 'GroupController@getPartial');
+Route::get('/Group/AlreadyExist', 'GroupController@alreadyExist');
+Route::get('/Group/AddGroup', 'GroupController@addGroup');
 
-Route::get('Groupe', function () {
-    return view('Groupe.index');
-});
+/* Person */
+Route::get('/Person/GetPartial', 'PersonController@getPartial');
 
-Route::post('/Group/AddGroup', 'GroupeController@AddGroupe');
-Route::post('/Group/AlreadyExist', 'GroupeController@AlreadyExist');
+/* GroupPersonYear */
+Route::get('/Association/GetPartial', 'GroupPersonYearController@getPartial');
+
+/* API */
+Route::get('/API/GetPartial', 'APIController@getPartial');
