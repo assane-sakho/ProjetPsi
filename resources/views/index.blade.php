@@ -6,17 +6,16 @@
   </p>
   <div id="content">
   </div>
+  
 @endsection
 @section('scripts')
 
 <script>
-    $(document).ready(function()
-    {
-        setPage('Group');
-    });
+    setPage('Association');
 
     function setPage(page)
     {
+
       $("nav").find("a").removeClass("active");
       $("#" + page + "Anchor").addClass("active");
 
@@ -41,14 +40,20 @@
           title += " de l'API";
           break;
       }
+
       $("#title").text(title);
 
       $.ajax({
           url:'/' + page + '/GetPartial',
           type:'GET',
           success:function(data){
+            displayToastr('loaded');
             $("#content").empty();
             $("#content").append(data);
+          },
+          error : function()
+          {
+            displayToastr('error');
           } 
       });
 
@@ -56,7 +61,7 @@
 
     function setDataTable()
     {
-      var fileName = $("title").text() + " " +  $("#title").text();
+      var fileName = $("title").text() + " - " +  $("#title").text();
       $(".table").DataTable().destroy();
       $(".table").DataTable({
         "language" : {
@@ -89,39 +94,42 @@
                     } 
             }
         },
-        dom: 'Brtip',
+        dom: 'Bfrtip',
         buttons: [
-          {
-              extend: 'csv',
-              title: fileName,
-              exportOptions: {
-              columns: ':visible:not(.not-export-col)'
-            }
-          },  
-          {
-              extend: 'excel',
-              title: fileName,
-              exportOptions: {
-                  columns: ':visible:not(.not-export-col)'
-            }
-          },  
-          {
-              extend: 'pdf',
-              title: fileName,
-              exportOptions: {
-                  columns: ':visible:not(.not-export-col)'
-              }
-          },  
-          {
-              extend: 'print',
-              title: fileName,
-              text: 'Imprimer',
-                exportOptions: {
-                  columns: ':visible:not(.not-export-col)'
-              }
-          },
+          { extend: 'csv', text: 'CSV', title : fileName, exportOptions: { columns: ':visible:not(.not-export-col)'}},
+          { extend: 'excel', text: 'Excel', title : fileName, exportOptions: { columns: ':visible:not(.not-export-col)'} },
+          { extend: 'pdf', text: 'PDF', title : fileName, exportOptions: { columns: ':visible:not(.not-export-col)'} },
+          { extend: 'print', text: 'Imprimer', title : fileName, exportOptions: { columns: ':visible:not(.not-export-col)'} },
+          { extend: 'copy', text: 'Copier', title : fileName, exportOptions: { columns: ':visible:not(.not-export-col)'} }
         ]
       });
+    }
+
+    function displayToastr(type)
+    {
+      var title = $("title").text() + " - " + "Administration";
+      var timeOut = (type == 'error') ? 2500 : 2000;
+
+      toastr.options = {
+      timeOut : timeOut, 
+      };
+
+      toastr.clear();
+      
+      switch(type){
+        case "save":
+          toastr.success('Les données ont été ajoutés.'), title;
+          break;
+        case "error":
+          toastr.error('Une erreur est survenue.', title);
+          break;
+        case "update":
+          toastr.success('Les modifications ont été enregistrés.'), title;
+          break;
+        case "loaded":
+          toastr.success('Les données ont été chargées.'), title;
+          break;
+      }
     }
 </script>
 @endsection

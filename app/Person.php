@@ -18,8 +18,4 @@ class Person extends Model
         return $this->belongsTo('App\Status');
     }
 
-    public function groupPersonYear()
-    {
-        return $this->hasMany(GroupPersonYear::class);
-    }
 }

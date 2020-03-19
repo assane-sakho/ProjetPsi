@@ -9,8 +9,8 @@ class GroupPersonYearController extends Controller
 {
     public function getPartial()
     {
-        $data = GroupPersonYear::all();
+        $associations = GroupPersonYear::all();
       
-        return view('groupPersonYear.partial', compact('data'));
+        return view('groupPersonYear.partial', compact('associations'));
     }
 }

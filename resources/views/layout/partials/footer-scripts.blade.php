@@ -9,4 +9,4 @@
 <script  src="{{ asset('js/popper.min.js') }}"></script>
 <script  src="{{ asset('js/buttons.html5.min.js') }}"></script>
 <script  src="{{ asset('js/buttons.print.min.js') }}"></script>
-
+<script  src="{{ asset('js/toastr.min.js') }}"></script>
