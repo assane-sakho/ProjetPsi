@@ -14,15 +14,15 @@
       </tr>
     </thead>
     <tbody>
-    @foreach ($persons as $person)
+    @foreach ($people as $person)
       <tr>
           <td>{{ $person->id }}</td>
           <td>{{ $person->lastname }}</td>
           <td>{{ $person->firstname }}</td>
           <td>{{ $person->email }}</td>
           <td>{{ $person->num }}</td>
-          <td>{{ $person->directoryId }}</td>
-          <td>{{ $person->statusId }}</td>
+          <td>{{ $person->directory->title }}</td>
+          <td>{{ $person->status }}</td>
       </tr>
     @endforeach
     </tbody>

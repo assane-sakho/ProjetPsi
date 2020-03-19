@@ -10,7 +10,7 @@ class GroupInfoController extends Controller
 {
     function GetPartial()
     {
-        $data = ["a" => "az"];
-        return view("groupInfo/partial", $data);
+        $groupsInfo = GroupInfo::all();
+        return view('groupInfo.partial', compact('groupsInfo'));
     }
 }

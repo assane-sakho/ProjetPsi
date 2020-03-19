@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class SchoolYear extends Model
 {
-    protected $fillable = ['name'];
-    protected $guarded = [];
     public $timestamps = false;
+    protected $guarded = [];
+
 }

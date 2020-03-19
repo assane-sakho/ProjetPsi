@@ -11,8 +11,8 @@ class PersonController extends Controller
         
     function GetPartial()
     {
-        $persons = Person::all();
+        $people = Person::all();
       
-        return view('person.partial')->with(compact('persons'));
+        return view('person.partial', compact('people'));
     }
 }
