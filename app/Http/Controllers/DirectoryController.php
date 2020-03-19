@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Person;
+use App\Directory;
 
-class PersonController extends Controller
+class DirectoryController extends Controller
 {
     //
 }

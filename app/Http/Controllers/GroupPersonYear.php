@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Person;
+use App\GroupPersonYear;
 
-class PersonController extends Controller
+class GroupPersonYear extends Controller
 {
     //
 }

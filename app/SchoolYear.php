@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolYears extends Model
+class SchoolYear extends Model
 {
     //
 }
