@@ -35,7 +35,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="" id="form">
+      <form action="" id="addForm">
         <div class="modal-body">
             @csrf
             <b for="groupeName">Nom du groupe</label> :<br/>
@@ -61,6 +61,7 @@
       </div>
       <form action="" id="editForm">
         <div class="modal-body">
+          @csrf
           <input type="hidden"name ="editId">
           <label for="editId">Nom du groupe</label> : <br/>
           <input type="text" name ="editName" class="form-control">
@@ -106,7 +107,7 @@
         });
     }
 
-    $('#form').submit(function(e){
+    $('#addForm').submit(function(e){
         e.preventDefault();
 
         checkIfExist().then(function(response)
@@ -116,7 +117,7 @@
                 $.ajax({
                     url:'/Group/AddGroup',
                     type:'POST',
-                    data:$(form).serialize(),
+                    data:$("#addForm").serialize(),
                     success:function(data){
                     }
                 });
@@ -137,9 +138,9 @@
       $.ajax({
           url:'/Group/EditGroup',
           type:'POST',
-          data:$(form).serialize(),
+          data:$("#editForm").serialize(),
           success:function(data){
-            
+             
           }
       });
     });

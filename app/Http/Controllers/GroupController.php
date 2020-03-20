@@ -27,4 +27,18 @@ class GroupController extends Controller
         $groupe = Group::create(['name' => $request->input("groupeName")]);
         return true;
     }
+
+    function editGroup(Request $request)
+    {
+        $id = $request->input("editId");
+        $name = $request->input("editName");
+        $group = Group::where('id',$id);
+        $group-> update(['name' => $name]);
+    }
+
+    function deleteGroup(Request $request, $id)
+    {
+        Group::where('id',$id)-> delete();
+    }
+
 }
