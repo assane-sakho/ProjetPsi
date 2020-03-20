@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Person;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Array_;
+use App\Person;
 
 class PersonController extends Controller
 {
-        
-    function GetPartial()
+    public function getPartial()
     {
-        $persons = Person::all();
+        $people = Person::all();
       
-        return view('person.partial')->with(compact('persons'));
+        return view('person.partial', compact('people'));
     }
 }

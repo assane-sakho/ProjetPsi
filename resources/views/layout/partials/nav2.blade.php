@@ -2,15 +2,15 @@
     <div class="sidebar-sticky">
     <ul class="nav flex-column">
         <li class="nav-item">
-        <a class="nav-link" id="GroupInfoAnchor" href="#" onclick="setPage('GroupInfo')">
+        <a class="nav-link" id="AssociationAnchor" href="#" onclick="setPage('Association')">
             <span data-feather="home"></span>
             Appartenance
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" id="GroupAnchor" onclick="setPage('Group')">
-            <span data-feather="file-text"></span>
-            Groupes 
+        <a class="nav-link" id="GroupAnchor" href="#" onclick="setPage('Group')">
+            <span data-feather="home"></span>
+            Groupes
         </a>
         </li>
         <li class="nav-item">

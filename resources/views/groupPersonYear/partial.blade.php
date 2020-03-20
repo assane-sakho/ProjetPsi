@@ -1,36 +1,44 @@
+
 </p>
-<button class="btn btn-success" id="addBtn" data-toggle="modal" data-target="#addModal">Ajouter</button></p>
+<button class="btn btn-success" id="addBtn" data-toggle="modal" data-target="#addModal">Ajouter</button>
+<button class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal">Importer</button></p>
 
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
       <tr>
-        <th>#</th>
+        <th>#<br/>Groupe</th>
+        <th>Nom du groupe</th>
+        <th>#<br/>Individu</th>
         <th>Nom</th>
         <th>Prenom</th>
         <th>Email</th>
         <th>Num</th>
         <th>Annuaire</th>
         <th>Statut</th>
+        <th>Année</th>
         <th class="not-export-col">Modifier</th>
         <th class="not-export-col">Supprimer</th>
       </tr>
     </thead>
     <tbody>
-    @foreach ($people as $person)
+    @foreach ($associations as $association)
       <tr>
-          <td>{{ $person->id }}</td>
-          <td>{{ $person->lastname }}</td>
-          <td>{{ $person->firstname }}</td>
-          <td>{{ $person->email ?? 'Non renseigné' }}</td>
-          <td>{{ $person->num }}</td>
-          <td>{{ $person->directory->name}}</td>
-          <td>{{ $person->status->title }}</td>
-          <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</button></td>
-          <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer</button></td>
+            <td>{{ $association->group->id }}</td>
+            <td>{{ $association->group->name }}</td>
+            <td>{{ $association->person->id }}</td>
+            <td>{{ $association->person->lastname }}</td>
+            <td>{{ $association->person->firstname }}</td>
+            <td>{{ $association->person->email ?? 'Non renseigné' }}</td>
+            <td>{{ $association->person->num }}</td>
+            <td>{{ $association->person->directory->name}}</td>
+            <td>{{ $association->person->status->title }}</td>
+            <td>{{ $association->year }} - {{ $association->year + 1 }} </td>
+            <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</button></td>
+            <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer</button></td>
       </tr>
-    @endforeach
-    </tbody>
+    @endforeach 
+      </tbody>
   </table>
 </div>
 
