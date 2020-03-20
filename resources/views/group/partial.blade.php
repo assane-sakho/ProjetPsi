@@ -118,7 +118,7 @@
             if (response == 'false')
             {
                 $.ajax({
-                    url:'/Group/AddGroup',
+                    url:'/Group/Add',
                     type:'POST',
                     data:$("#addForm").serialize(),
                     success:function(data){
@@ -137,7 +137,7 @@
     $('#editForm').submit(function(e){
       e.preventDefault();
       $.ajax({
-          url:'/Group/EditGroup',
+          url:'/Group/Update',
           type:'POST',
           data:$("#editForm").serialize(),
           success:function(data){
@@ -155,7 +155,7 @@
     $('#deleteForm').submit(function(e){
       e.preventDefault();
       $.ajax({
-          url:'/Group/DeleteGroup',
+          url:'/Group/Delete',
           type:'POST',
           data:$("#deleteForm").serialize(),
           success:function(data){

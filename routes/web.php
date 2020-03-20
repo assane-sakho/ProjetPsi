@@ -10,7 +10,7 @@ Route::get('/', function () {
 Route::get('/Group/GetPartial', 'GroupController@getPartial');
 Route::post('/Group/AlreadyExist', 'GroupController@alreadyExist');
 Route::post('/Group/Add', 'GroupController@add');
-Route::post('/Group/Edit', 'GroupController@update');
+Route::post('/Group/Update', 'GroupController@update');
 Route::post('/Group/Delete', 'GroupController@delete');
 
 /* Person */
