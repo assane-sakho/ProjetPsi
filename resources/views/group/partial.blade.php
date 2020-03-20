@@ -2,8 +2,8 @@
 </p>
 
 </p>
-<div class="table-responsive" id="dataTable">
-  <table class="table table-striped table-sm">
+<div class="table-responsive">
+  <table class="table table-striped table-sm" id="dataTable">
     <thead>
       <tr>
         <th>#</th>

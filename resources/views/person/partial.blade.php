@@ -46,7 +46,7 @@
             data-id="{{ $person->id }}"
             data-lastname="{{ $person->lastname }}"
             data-firstname="{{ $person->firstname }}"
-            data-email="{{ $person->email }}"
+            data-email="{{ $person->email ?? 'Non renseigné' }}"
             data-num="{{ $person->num }}"
             data-directoryId="{{ $person->directory->id}}"
             data-statusId="{{ $person->status->id}}">Supprimer</button>
@@ -161,8 +161,10 @@
       <input type="hidden" name="deleteId" id="deleteId">
         @csrf
         <div class="modal-body">
-          Voulez-vous suppripmer <span id="deleteName"></span> ?</p></p>
-          <table class="table table-stripped">
+          Voulez-vous suppripmer <b id="deleteName"></b> ?
+          </p>
+          </p>
+          <table class="table table striped">
           <tr>
             <td>Email</td>
             <td id="tdDeleteEmail"></td>
