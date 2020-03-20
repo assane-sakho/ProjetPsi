@@ -33,7 +33,7 @@
             <td>{{ $association->person->num }}</td>
             <td>{{ $association->person->directory->name}}</td>
             <td>{{ $association->person->status->title }}</td>
-            <td>{{ $association->year }}</td>
+            <td>{{ $association->year }} - {{ $association->year + 1 }} </td>
             <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</button></td>
             <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer</button></td>
       </tr>
