@@ -63,7 +63,7 @@
         <div class="modal-body">
           @csrf
           <input type="hidden"name ="editId">
-          <label for="editId">Nom du groupe</label> : <br/>
+          <label for="editName">Nom du groupe</label> : <br/>
           <input type="text" name ="editName" class="form-control">
         </div>
         <div class="modal-footer">
@@ -84,17 +84,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Oui</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-      </div>
+      <form action="" id="deleteForm">
+        <div class="modal-body">
+          @csrf
+          <input type="hidden" name="deleteId">
+          <span id="deleteMessage"> </span>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Oui</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
 
 <script>
     setDataTable();
@@ -133,6 +136,14 @@
       $(e.currentTarget).find('input[name="editName"]').val(name);
     });
 
+    $('#deleteModal').on('show.bs.modal', function(e) {
+      var id = $(e.relatedTarget).data('id');
+      var name = $(e.relatedTarget).data('name');
+
+      $(e.currentTarget).find('input[name="deleteId"]').val(id);
+      $("#deleteMessage").text("Voulez-vous supprimer le groupe " + name + " ?");
+    });
+
     $('#editForm').submit(function(e){
       e.preventDefault();
       $.ajax({
@@ -141,6 +152,18 @@
           data:$("#editForm").serialize(),
           success:function(data){
              
+          }
+      });
+    });
+
+    $('#deleteForm').submit(function(e){
+      e.preventDefault();
+      $.ajax({
+          url:'/Group/DeleteGroup',
+          type:'POST',
+          data:$("#deleteForm").serialize(),
+          success:function(data){
+          
           }
       });
     });

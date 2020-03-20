@@ -36,9 +36,12 @@ class GroupController extends Controller
         $group-> update(['name' => $name]);
     }
 
-    function deleteGroup(Request $request, $id)
+    function deleteGroup(Request $request)
     {
-        Group::where('id',$id)-> delete();
+        $id = $request->input("deleteId");
+        $group = Group::where('id',$id);
+        $group-> delete();
+        echo $id;
     }
 
 }
