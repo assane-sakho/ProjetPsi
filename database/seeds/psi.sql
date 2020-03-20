@@ -11,7 +11,7 @@
  Target Server Version : 50615
  File Encoding         : 65001
 
- Date: 20/03/2020 00:26:23
+ Date: 20/03/2019 00:50:58
 */
 
 SET NAMES utf8mb4;
@@ -25,13 +25,14 @@ CREATE TABLE `directories`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of directories
 -- ----------------------------
-INSERT INTO `directories` VALUES (1, 'Annuaire 1');
-INSERT INTO `directories` VALUES (2, 'Annuaire 2');
+INSERT INTO `directories` VALUES (1, 'HARPEGE');
+INSERT INTO `directories` VALUES (2, 'APOGEE');
+INSERT INTO `directories` VALUES (3, 'FOMASUP');
 
 -- ----------------------------
 -- Table structure for group_person_year
@@ -52,138 +53,138 @@ CREATE TABLE `group_person_year`  (
 -- ----------------------------
 -- Records of group_person_year
 -- ----------------------------
-INSERT INTO `group_person_year` VALUES (1, 1, 2020);
-INSERT INTO `group_person_year` VALUES (1, 2, 2020);
-INSERT INTO `group_person_year` VALUES (1, 3, 2020);
-INSERT INTO `group_person_year` VALUES (1, 4, 2020);
-INSERT INTO `group_person_year` VALUES (1, 5, 2020);
-INSERT INTO `group_person_year` VALUES (1, 6, 2020);
-INSERT INTO `group_person_year` VALUES (1, 7, 2020);
-INSERT INTO `group_person_year` VALUES (1, 8, 2020);
-INSERT INTO `group_person_year` VALUES (1, 9, 2020);
-INSERT INTO `group_person_year` VALUES (1, 10, 2020);
-INSERT INTO `group_person_year` VALUES (1, 11, 2020);
-INSERT INTO `group_person_year` VALUES (1, 12, 2020);
-INSERT INTO `group_person_year` VALUES (1, 13, 2020);
-INSERT INTO `group_person_year` VALUES (1, 14, 2020);
-INSERT INTO `group_person_year` VALUES (1, 15, 2020);
-INSERT INTO `group_person_year` VALUES (1, 16, 2020);
-INSERT INTO `group_person_year` VALUES (1, 17, 2020);
-INSERT INTO `group_person_year` VALUES (1, 18, 2020);
-INSERT INTO `group_person_year` VALUES (1, 19, 2020);
-INSERT INTO `group_person_year` VALUES (1, 20, 2020);
-INSERT INTO `group_person_year` VALUES (1, 21, 2020);
-INSERT INTO `group_person_year` VALUES (1, 22, 2020);
-INSERT INTO `group_person_year` VALUES (1, 23, 2020);
-INSERT INTO `group_person_year` VALUES (1, 24, 2020);
-INSERT INTO `group_person_year` VALUES (1, 25, 2020);
-INSERT INTO `group_person_year` VALUES (2, 26, 2020);
-INSERT INTO `group_person_year` VALUES (2, 27, 2020);
-INSERT INTO `group_person_year` VALUES (2, 28, 2020);
-INSERT INTO `group_person_year` VALUES (2, 29, 2020);
-INSERT INTO `group_person_year` VALUES (2, 30, 2020);
-INSERT INTO `group_person_year` VALUES (2, 31, 2020);
-INSERT INTO `group_person_year` VALUES (2, 32, 2020);
-INSERT INTO `group_person_year` VALUES (2, 33, 2020);
-INSERT INTO `group_person_year` VALUES (2, 34, 2020);
-INSERT INTO `group_person_year` VALUES (2, 35, 2020);
-INSERT INTO `group_person_year` VALUES (2, 36, 2020);
-INSERT INTO `group_person_year` VALUES (2, 37, 2020);
-INSERT INTO `group_person_year` VALUES (2, 38, 2020);
-INSERT INTO `group_person_year` VALUES (2, 39, 2020);
-INSERT INTO `group_person_year` VALUES (2, 40, 2020);
-INSERT INTO `group_person_year` VALUES (2, 41, 2020);
-INSERT INTO `group_person_year` VALUES (2, 42, 2020);
-INSERT INTO `group_person_year` VALUES (2, 43, 2020);
-INSERT INTO `group_person_year` VALUES (2, 44, 2020);
-INSERT INTO `group_person_year` VALUES (2, 45, 2020);
-INSERT INTO `group_person_year` VALUES (2, 46, 2020);
-INSERT INTO `group_person_year` VALUES (2, 47, 2020);
-INSERT INTO `group_person_year` VALUES (2, 48, 2020);
-INSERT INTO `group_person_year` VALUES (2, 49, 2020);
-INSERT INTO `group_person_year` VALUES (2, 50, 2020);
-INSERT INTO `group_person_year` VALUES (2, 51, 2020);
-INSERT INTO `group_person_year` VALUES (2, 52, 2020);
-INSERT INTO `group_person_year` VALUES (2, 53, 2020);
-INSERT INTO `group_person_year` VALUES (2, 54, 2020);
-INSERT INTO `group_person_year` VALUES (2, 55, 2020);
-INSERT INTO `group_person_year` VALUES (2, 56, 2020);
-INSERT INTO `group_person_year` VALUES (2, 57, 2020);
-INSERT INTO `group_person_year` VALUES (2, 58, 2020);
-INSERT INTO `group_person_year` VALUES (2, 59, 2020);
-INSERT INTO `group_person_year` VALUES (2, 60, 2020);
-INSERT INTO `group_person_year` VALUES (2, 61, 2020);
-INSERT INTO `group_person_year` VALUES (2, 62, 2020);
-INSERT INTO `group_person_year` VALUES (2, 63, 2020);
-INSERT INTO `group_person_year` VALUES (2, 64, 2020);
-INSERT INTO `group_person_year` VALUES (2, 65, 2020);
-INSERT INTO `group_person_year` VALUES (2, 66, 2020);
-INSERT INTO `group_person_year` VALUES (2, 67, 2020);
-INSERT INTO `group_person_year` VALUES (2, 68, 2020);
-INSERT INTO `group_person_year` VALUES (2, 69, 2020);
-INSERT INTO `group_person_year` VALUES (2, 70, 2020);
-INSERT INTO `group_person_year` VALUES (2, 71, 2020);
-INSERT INTO `group_person_year` VALUES (2, 72, 2020);
-INSERT INTO `group_person_year` VALUES (2, 73, 2020);
-INSERT INTO `group_person_year` VALUES (2, 74, 2020);
-INSERT INTO `group_person_year` VALUES (2, 75, 2020);
-INSERT INTO `group_person_year` VALUES (2, 76, 2020);
-INSERT INTO `group_person_year` VALUES (2, 77, 2020);
-INSERT INTO `group_person_year` VALUES (2, 78, 2020);
-INSERT INTO `group_person_year` VALUES (2, 79, 2020);
-INSERT INTO `group_person_year` VALUES (2, 80, 2020);
-INSERT INTO `group_person_year` VALUES (2, 81, 2020);
-INSERT INTO `group_person_year` VALUES (2, 82, 2020);
-INSERT INTO `group_person_year` VALUES (2, 83, 2020);
-INSERT INTO `group_person_year` VALUES (2, 84, 2020);
-INSERT INTO `group_person_year` VALUES (2, 85, 2020);
-INSERT INTO `group_person_year` VALUES (2, 86, 2020);
-INSERT INTO `group_person_year` VALUES (2, 87, 2020);
-INSERT INTO `group_person_year` VALUES (2, 88, 2020);
-INSERT INTO `group_person_year` VALUES (2, 89, 2020);
-INSERT INTO `group_person_year` VALUES (2, 90, 2020);
-INSERT INTO `group_person_year` VALUES (2, 91, 2020);
-INSERT INTO `group_person_year` VALUES (2, 92, 2020);
-INSERT INTO `group_person_year` VALUES (2, 93, 2020);
-INSERT INTO `group_person_year` VALUES (2, 94, 2020);
-INSERT INTO `group_person_year` VALUES (2, 95, 2020);
-INSERT INTO `group_person_year` VALUES (2, 96, 2020);
-INSERT INTO `group_person_year` VALUES (2, 97, 2020);
-INSERT INTO `group_person_year` VALUES (2, 98, 2020);
-INSERT INTO `group_person_year` VALUES (2, 99, 2020);
-INSERT INTO `group_person_year` VALUES (2, 100, 2020);
-INSERT INTO `group_person_year` VALUES (2, 101, 2020);
-INSERT INTO `group_person_year` VALUES (2, 102, 2020);
-INSERT INTO `group_person_year` VALUES (2, 103, 2020);
-INSERT INTO `group_person_year` VALUES (2, 104, 2020);
-INSERT INTO `group_person_year` VALUES (2, 105, 2020);
-INSERT INTO `group_person_year` VALUES (2, 106, 2020);
-INSERT INTO `group_person_year` VALUES (2, 107, 2020);
-INSERT INTO `group_person_year` VALUES (2, 108, 2020);
-INSERT INTO `group_person_year` VALUES (2, 109, 2020);
-INSERT INTO `group_person_year` VALUES (2, 110, 2020);
-INSERT INTO `group_person_year` VALUES (2, 111, 2020);
-INSERT INTO `group_person_year` VALUES (2, 112, 2020);
-INSERT INTO `group_person_year` VALUES (2, 113, 2020);
-INSERT INTO `group_person_year` VALUES (2, 114, 2020);
-INSERT INTO `group_person_year` VALUES (2, 115, 2020);
-INSERT INTO `group_person_year` VALUES (2, 116, 2020);
-INSERT INTO `group_person_year` VALUES (2, 117, 2020);
-INSERT INTO `group_person_year` VALUES (2, 118, 2020);
-INSERT INTO `group_person_year` VALUES (2, 119, 2020);
-INSERT INTO `group_person_year` VALUES (2, 120, 2020);
-INSERT INTO `group_person_year` VALUES (2, 121, 2020);
-INSERT INTO `group_person_year` VALUES (2, 122, 2020);
-INSERT INTO `group_person_year` VALUES (2, 123, 2020);
-INSERT INTO `group_person_year` VALUES (2, 124, 2020);
-INSERT INTO `group_person_year` VALUES (2, 125, 2020);
-INSERT INTO `group_person_year` VALUES (2, 126, 2020);
-INSERT INTO `group_person_year` VALUES (2, 127, 2020);
-INSERT INTO `group_person_year` VALUES (2, 128, 2020);
-INSERT INTO `group_person_year` VALUES (2, 129, 2020);
-INSERT INTO `group_person_year` VALUES (2, 130, 2020);
-INSERT INTO `group_person_year` VALUES (2, 131, 2020);
-INSERT INTO `group_person_year` VALUES (2, 132, 2020);
+INSERT INTO `group_person_year` VALUES (1, 1, 2019);
+INSERT INTO `group_person_year` VALUES (1, 2, 2019);
+INSERT INTO `group_person_year` VALUES (1, 3, 2019);
+INSERT INTO `group_person_year` VALUES (1, 4, 2019);
+INSERT INTO `group_person_year` VALUES (1, 5, 2019);
+INSERT INTO `group_person_year` VALUES (1, 6, 2019);
+INSERT INTO `group_person_year` VALUES (1, 7, 2019);
+INSERT INTO `group_person_year` VALUES (1, 8, 2019);
+INSERT INTO `group_person_year` VALUES (1, 9, 2019);
+INSERT INTO `group_person_year` VALUES (1, 10, 2019);
+INSERT INTO `group_person_year` VALUES (1, 11, 2019);
+INSERT INTO `group_person_year` VALUES (1, 12, 2019);
+INSERT INTO `group_person_year` VALUES (1, 13, 2019);
+INSERT INTO `group_person_year` VALUES (1, 14, 2019);
+INSERT INTO `group_person_year` VALUES (1, 15, 2019);
+INSERT INTO `group_person_year` VALUES (1, 16, 2019);
+INSERT INTO `group_person_year` VALUES (1, 17, 2019);
+INSERT INTO `group_person_year` VALUES (1, 18, 2019);
+INSERT INTO `group_person_year` VALUES (1, 19, 2019);
+INSERT INTO `group_person_year` VALUES (1, 20, 2019);
+INSERT INTO `group_person_year` VALUES (1, 21, 2019);
+INSERT INTO `group_person_year` VALUES (1, 22, 2019);
+INSERT INTO `group_person_year` VALUES (1, 23, 2019);
+INSERT INTO `group_person_year` VALUES (1, 24, 2019);
+INSERT INTO `group_person_year` VALUES (1, 25, 2019);
+INSERT INTO `group_person_year` VALUES (2, 26, 2019);
+INSERT INTO `group_person_year` VALUES (2, 27, 2019);
+INSERT INTO `group_person_year` VALUES (2, 28, 2019);
+INSERT INTO `group_person_year` VALUES (2, 29, 2019);
+INSERT INTO `group_person_year` VALUES (2, 30, 2019);
+INSERT INTO `group_person_year` VALUES (2, 31, 2019);
+INSERT INTO `group_person_year` VALUES (2, 32, 2019);
+INSERT INTO `group_person_year` VALUES (2, 33, 2019);
+INSERT INTO `group_person_year` VALUES (2, 34, 2019);
+INSERT INTO `group_person_year` VALUES (2, 35, 2019);
+INSERT INTO `group_person_year` VALUES (2, 36, 2019);
+INSERT INTO `group_person_year` VALUES (2, 37, 2019);
+INSERT INTO `group_person_year` VALUES (2, 38, 2019);
+INSERT INTO `group_person_year` VALUES (2, 39, 2019);
+INSERT INTO `group_person_year` VALUES (2, 40, 2019);
+INSERT INTO `group_person_year` VALUES (2, 41, 2019);
+INSERT INTO `group_person_year` VALUES (2, 42, 2019);
+INSERT INTO `group_person_year` VALUES (2, 43, 2019);
+INSERT INTO `group_person_year` VALUES (2, 44, 2019);
+INSERT INTO `group_person_year` VALUES (2, 45, 2019);
+INSERT INTO `group_person_year` VALUES (2, 46, 2019);
+INSERT INTO `group_person_year` VALUES (2, 47, 2019);
+INSERT INTO `group_person_year` VALUES (2, 48, 2019);
+INSERT INTO `group_person_year` VALUES (2, 49, 2019);
+INSERT INTO `group_person_year` VALUES (2, 50, 2019);
+INSERT INTO `group_person_year` VALUES (2, 51, 2019);
+INSERT INTO `group_person_year` VALUES (2, 52, 2019);
+INSERT INTO `group_person_year` VALUES (2, 53, 2019);
+INSERT INTO `group_person_year` VALUES (2, 54, 2019);
+INSERT INTO `group_person_year` VALUES (2, 55, 2019);
+INSERT INTO `group_person_year` VALUES (2, 56, 2019);
+INSERT INTO `group_person_year` VALUES (2, 57, 2019);
+INSERT INTO `group_person_year` VALUES (2, 58, 2019);
+INSERT INTO `group_person_year` VALUES (2, 59, 2019);
+INSERT INTO `group_person_year` VALUES (2, 60, 2019);
+INSERT INTO `group_person_year` VALUES (2, 61, 2019);
+INSERT INTO `group_person_year` VALUES (2, 62, 2019);
+INSERT INTO `group_person_year` VALUES (2, 63, 2019);
+INSERT INTO `group_person_year` VALUES (2, 64, 2019);
+INSERT INTO `group_person_year` VALUES (2, 65, 2019);
+INSERT INTO `group_person_year` VALUES (2, 66, 2019);
+INSERT INTO `group_person_year` VALUES (2, 67, 2019);
+INSERT INTO `group_person_year` VALUES (2, 68, 2019);
+INSERT INTO `group_person_year` VALUES (2, 69, 2019);
+INSERT INTO `group_person_year` VALUES (2, 70, 2019);
+INSERT INTO `group_person_year` VALUES (2, 71, 2019);
+INSERT INTO `group_person_year` VALUES (2, 72, 2019);
+INSERT INTO `group_person_year` VALUES (2, 73, 2019);
+INSERT INTO `group_person_year` VALUES (2, 74, 2019);
+INSERT INTO `group_person_year` VALUES (2, 75, 2019);
+INSERT INTO `group_person_year` VALUES (2, 76, 2019);
+INSERT INTO `group_person_year` VALUES (2, 77, 2019);
+INSERT INTO `group_person_year` VALUES (2, 78, 2019);
+INSERT INTO `group_person_year` VALUES (2, 79, 2019);
+INSERT INTO `group_person_year` VALUES (2, 80, 2019);
+INSERT INTO `group_person_year` VALUES (2, 81, 2019);
+INSERT INTO `group_person_year` VALUES (2, 82, 2019);
+INSERT INTO `group_person_year` VALUES (2, 83, 2019);
+INSERT INTO `group_person_year` VALUES (2, 84, 2019);
+INSERT INTO `group_person_year` VALUES (2, 85, 2019);
+INSERT INTO `group_person_year` VALUES (2, 86, 2019);
+INSERT INTO `group_person_year` VALUES (2, 87, 2019);
+INSERT INTO `group_person_year` VALUES (2, 88, 2019);
+INSERT INTO `group_person_year` VALUES (2, 89, 2019);
+INSERT INTO `group_person_year` VALUES (2, 90, 2019);
+INSERT INTO `group_person_year` VALUES (2, 91, 2019);
+INSERT INTO `group_person_year` VALUES (2, 92, 2019);
+INSERT INTO `group_person_year` VALUES (2, 93, 2019);
+INSERT INTO `group_person_year` VALUES (2, 94, 2019);
+INSERT INTO `group_person_year` VALUES (2, 95, 2019);
+INSERT INTO `group_person_year` VALUES (2, 96, 2019);
+INSERT INTO `group_person_year` VALUES (2, 97, 2019);
+INSERT INTO `group_person_year` VALUES (2, 98, 2019);
+INSERT INTO `group_person_year` VALUES (2, 99, 2019);
+INSERT INTO `group_person_year` VALUES (2, 100, 2019);
+INSERT INTO `group_person_year` VALUES (2, 101, 2019);
+INSERT INTO `group_person_year` VALUES (2, 102, 2019);
+INSERT INTO `group_person_year` VALUES (2, 103, 2019);
+INSERT INTO `group_person_year` VALUES (2, 104, 2019);
+INSERT INTO `group_person_year` VALUES (2, 105, 2019);
+INSERT INTO `group_person_year` VALUES (2, 106, 2019);
+INSERT INTO `group_person_year` VALUES (2, 107, 2019);
+INSERT INTO `group_person_year` VALUES (2, 108, 2019);
+INSERT INTO `group_person_year` VALUES (2, 109, 2019);
+INSERT INTO `group_person_year` VALUES (2, 110, 2019);
+INSERT INTO `group_person_year` VALUES (2, 111, 2019);
+INSERT INTO `group_person_year` VALUES (2, 112, 2019);
+INSERT INTO `group_person_year` VALUES (2, 113, 2019);
+INSERT INTO `group_person_year` VALUES (2, 114, 2019);
+INSERT INTO `group_person_year` VALUES (2, 115, 2019);
+INSERT INTO `group_person_year` VALUES (2, 116, 2019);
+INSERT INTO `group_person_year` VALUES (2, 117, 2019);
+INSERT INTO `group_person_year` VALUES (2, 118, 2019);
+INSERT INTO `group_person_year` VALUES (2, 119, 2019);
+INSERT INTO `group_person_year` VALUES (2, 120, 2019);
+INSERT INTO `group_person_year` VALUES (2, 121, 2019);
+INSERT INTO `group_person_year` VALUES (2, 122, 2019);
+INSERT INTO `group_person_year` VALUES (2, 123, 2019);
+INSERT INTO `group_person_year` VALUES (2, 124, 2019);
+INSERT INTO `group_person_year` VALUES (2, 125, 2019);
+INSERT INTO `group_person_year` VALUES (2, 126, 2019);
+INSERT INTO `group_person_year` VALUES (2, 127, 2019);
+INSERT INTO `group_person_year` VALUES (2, 128, 2019);
+INSERT INTO `group_person_year` VALUES (2, 129, 2019);
+INSERT INTO `group_person_year` VALUES (2, 130, 2019);
+INSERT INTO `group_person_year` VALUES (2, 131, 2019);
+INSERT INTO `group_person_year` VALUES (2, 132, 2019);
 
 -- ----------------------------
 -- Table structure for groups
@@ -199,8 +200,8 @@ CREATE TABLE `groups`  (
 -- ----------------------------
 -- Records of groups
 -- ----------------------------
-INSERT INTO `groups` VALUES (2, 'L2_MIASHS');
-INSERT INTO `groups` VALUES (1, 'L3_MIAGE_APP');
+INSERT INTO `groups` VALUES (2, 'L2 MIASHS');
+INSERT INTO `groups` VALUES (1, 'L3 MIAGE_APP');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -216,12 +217,12 @@ CREATE TABLE `migrations`  (
 -- ----------------------------
 -- Records of migrations
 -- ----------------------------
-INSERT INTO `migrations` VALUES (1, '2020_03_19_181653_statuses', 1);
-INSERT INTO `migrations` VALUES (2, '2020_03_19_181706_directories', 1);
-INSERT INTO `migrations` VALUES (3, '2020_03_19_182117_people', 1);
-INSERT INTO `migrations` VALUES (4, '2020_03_19_182452_groups', 1);
-INSERT INTO `migrations` VALUES (5, '2020_03_19_183740_school_years', 1);
-INSERT INTO `migrations` VALUES (6, '2020_03_19_184128_group_person_year', 1);
+INSERT INTO `migrations` VALUES (1, '2019_03_19_181653_statuses', 1);
+INSERT INTO `migrations` VALUES (2, '2019_03_19_181706_directories', 1);
+INSERT INTO `migrations` VALUES (3, '2019_03_19_182117_people', 1);
+INSERT INTO `migrations` VALUES (4, '2019_03_19_182452_groups', 1);
+INSERT INTO `migrations` VALUES (5, '2019_03_19_183740_school_years', 1);
+INSERT INTO `migrations` VALUES (6, '2019_03_19_184128_group_person_year', 1);
 
 -- ----------------------------
 -- Table structure for people
@@ -377,71 +378,71 @@ INSERT INTO `people` VALUES (129, 'Sun', 'Jialei', NULL, 340129, 2, 1);
 INSERT INTO `people` VALUES (130, 'Tahir', 'Mohamed - imrane', NULL, 340130, 2, 1);
 INSERT INTO `people` VALUES (131, 'Tissot', 'Guilhem', NULL, 340131, 2, 1);
 INSERT INTO `people` VALUES (132, 'Tliba', 'Ahmed', NULL, 340132, 2, 1);
-INSERT INTO `people` VALUES (133, 'LE ROUX', 'Annaig', NULL, 34100, 1, 1);
-INSERT INTO `people` VALUES (134, 'Bouchakhchoukha', 'Adel', NULL, 34101, 1, 1);
-INSERT INTO `people` VALUES (135, 'BELLINI', 'Béatrice', NULL, 34102, 1, 1);
-INSERT INTO `people` VALUES (136, 'Hardouin Ceccantini', 'Cécile', NULL, 34103, 1, 1);
-INSERT INTO `people` VALUES (137, 'Mesnager', 'Laurent', NULL, 34104, 1, 1);
-INSERT INTO `people` VALUES (138, 'Le Cun', 'Bertrand', NULL, 34105, 1, 1);
-INSERT INTO `people` VALUES (139, 'Hanen', 'Claire', NULL, 34106, 1, 1);
-INSERT INTO `people` VALUES (140, 'Guyon', 'Thomas', NULL, 34107, 1, 1);
-INSERT INTO `people` VALUES (141, 'Ben Hamida Mrabet', 'Sana', NULL, 34108, 1, 1);
-INSERT INTO `people` VALUES (142, 'Ikken', 'Sonia', NULL, 34109, 1, 1);
-INSERT INTO `people` VALUES (143, 'Gervais', 'Marie-Pierre', NULL, 34110, 1, 1);
-INSERT INTO `people` VALUES (144, 'Duvernet', 'Laurent', NULL, 34111, 1, 1);
-INSERT INTO `people` VALUES (145, 'Castillo_', 'Alberto', NULL, 34112, 1, 1);
-INSERT INTO `people` VALUES (146, 'Baarir', 'Souheib', NULL, 34113, 1, 1);
-INSERT INTO `people` VALUES (147, 'Delbot', 'François', NULL, 34114, 1, 1);
-INSERT INTO `people` VALUES (148, 'Azhar-Arnal', 'Juliette', NULL, 34115, 1, 1);
-INSERT INTO `people` VALUES (149, 'Rukoz-Castillo', 'Marta', NULL, 34116, 1, 1);
-INSERT INTO `people` VALUES (150, 'Legond-Aubry', 'Fabrice', NULL, 34117, 1, 1);
-INSERT INTO `people` VALUES (151, 'Quinio', 'Bernard', NULL, 34118, 1, 1);
-INSERT INTO `people` VALUES (152, 'Pradat-Peyre', 'Jean-François', NULL, 34119, 1, 1);
-INSERT INTO `people` VALUES (153, 'Ameur', 'Yannick', NULL, 34120, 1, 1);
-INSERT INTO `people` VALUES (154, 'Décallonne', 'Marc', NULL, 34121, 1, 1);
-INSERT INTO `people` VALUES (155, 'Dubois', 'Aloîs', NULL, 34122, 1, 1);
-INSERT INTO `people` VALUES (156, 'Duriez', 'Nathalie', NULL, 34123, 1, 1);
-INSERT INTO `people` VALUES (157, 'Florea', 'Paul', NULL, 34124, 1, 1);
-INSERT INTO `people` VALUES (158, 'Isoard', 'Thierry Michel', NULL, 34125, 1, 1);
-INSERT INTO `people` VALUES (159, 'Latif', 'Youssef', NULL, 34126, 1, 1);
-INSERT INTO `people` VALUES (160, 'Leloir', 'Nicole', NULL, 34127, 1, 1);
-INSERT INTO `people` VALUES (161, 'Novelli', 'Emmanuelle', NULL, 34128, 1, 1);
-INSERT INTO `people` VALUES (162, 'Pujol', 'Nicolas', NULL, 34129, 1, 1);
-INSERT INTO `people` VALUES (163, 'Renaud', 'Francis', NULL, 34130, 1, 1);
-INSERT INTO `people` VALUES (164, 'Serdoun', 'Samy', NULL, 34131, 1, 1);
-INSERT INTO `people` VALUES (165, 'Starck', 'Monia', NULL, 34132, 1, 1);
-INSERT INTO `people` VALUES (166, 'Thomas', 'Aurélie', NULL, 34133, 1, 1);
-INSERT INTO `people` VALUES (167, 'Tourvieille', 'Marc', NULL, 34134, 1, 1);
-INSERT INTO `people` VALUES (168, 'Zamfirou', 'Michel', NULL, 34135, 1, 1);
-INSERT INTO `people` VALUES (169, 'Zilova', 'Jana', NULL, 34136, 1, 1);
-INSERT INTO `people` VALUES (170, 'Menouer', 'Tarek', NULL, 34137, 1, 1);
-INSERT INTO `people` VALUES (171, 'Rodier', 'Lise', NULL, 34138, 1, 1);
-INSERT INTO `people` VALUES (172, 'Angarita Arocha', 'Rafael Enrique', NULL, 34139, 1, 1);
-INSERT INTO `people` VALUES (173, 'Ait Salaht', 'Farah', NULL, 34140, 1, 1);
-INSERT INTO `people` VALUES (174, 'Rousseau', 'Pierre', NULL, 34141, 1, 1);
-INSERT INTO `people` VALUES (175, 'Medjek', 'Sarah', NULL, 34142, 1, 1);
-INSERT INTO `people` VALUES (176, 'Guézou', 'Xavier', NULL, 34143, 1, 1);
-INSERT INTO `people` VALUES (177, 'D_Alfonso', 'Giovanna', NULL, 34144, 1, 1);
-INSERT INTO `people` VALUES (178, 'KELLOU-MENOUER', 'Kenza', NULL, 34145, 1, 1);
-INSERT INTO `people` VALUES (179, 'Oulhaci', 'Faiza', NULL, 34146, 1, 1);
-INSERT INTO `people` VALUES (180, 'Poizat', 'Pascal', NULL, 34147, 1, 1);
-INSERT INTO `people` VALUES (181, 'SADDEM', 'Rim ', NULL, 34148, 1, 1);
-INSERT INTO `people` VALUES (182, 'BENAMMAR', 'Nassima ', NULL, 34149, 1, 1);
-INSERT INTO `people` VALUES (183, 'ARFAOUI', 'Khadija', NULL, 34150, 1, 1);
-INSERT INTO `people` VALUES (184, 'Walter', 'Jean-Marc', NULL, 34151, 1, 1);
-INSERT INTO `people` VALUES (185, 'Bendraou', 'Reda', NULL, 34152, 1, 1);
-INSERT INTO `people` VALUES (186, 'Cojean', 'Bruno', NULL, 34153, 1, 1);
-INSERT INTO `people` VALUES (187, 'Abrantes', 'Pedro', NULL, 34154, 1, 1);
-INSERT INTO `people` VALUES (188, 'Zouari', 'Belhassen', NULL, 34155, 1, 1);
-INSERT INTO `people` VALUES (189, 'HOUHOU', 'Sara ', NULL, 34156, 1, 1);
-INSERT INTO `people` VALUES (190, 'GUEHIS-SAADAOUI', 'Sonia', NULL, 34157, 1, 1);
-INSERT INTO `people` VALUES (191, 'Hillah', 'Lom Messan', NULL, 34158, 1, 1);
-INSERT INTO `people` VALUES (192, 'Hmedeh', 'Zeinab', NULL, 34159, 1, 1);
-INSERT INTO `people` VALUES (193, 'Gherbi', 'Tahar', NULL, 34160, 1, 1);
-INSERT INTO `people` VALUES (194, 'Alaoui', 'Malek', NULL, 34161, 1, 1);
-INSERT INTO `people` VALUES (195, 'Non defini', 'Non defini', NULL, 404, 1, 1);
-INSERT INTO `people` VALUES (196, 'Pierre', 'Laurent', NULL, 34163, 1, 1);
-INSERT INTO `people` VALUES (197, 'Hyon', 'Emmanuel', NULL, 34164, 1, 1);
+INSERT INTO `people` VALUES (133, 'LE ROUX', 'Annaig', NULL, 34100, 1, 5);
+INSERT INTO `people` VALUES (134, 'Bouchakhchoukha', 'Adel', NULL, 34101, 1, 5);
+INSERT INTO `people` VALUES (135, 'BELLINI', 'Béatrice', NULL, 34102, 1, 5);
+INSERT INTO `people` VALUES (136, 'Hardouin Ceccantini', 'Cécile', NULL, 34103, 1, 5);
+INSERT INTO `people` VALUES (137, 'Mesnager', 'Laurent', NULL, 34104, 1, 5);
+INSERT INTO `people` VALUES (138, 'Le Cun', 'Bertrand', NULL, 34105, 1, 5);
+INSERT INTO `people` VALUES (139, 'Hanen', 'Claire', NULL, 34106, 1, 5);
+INSERT INTO `people` VALUES (140, 'Guyon', 'Thomas', NULL, 34107, 1, 5);
+INSERT INTO `people` VALUES (141, 'Ben Hamida Mrabet', 'Sana', NULL, 34108, 1, 5);
+INSERT INTO `people` VALUES (142, 'Ikken', 'Sonia', NULL, 34109, 1, 5);
+INSERT INTO `people` VALUES (143, 'Gervais', 'Marie-Pierre', NULL, 34110, 1, 5);
+INSERT INTO `people` VALUES (144, 'Duvernet', 'Laurent', NULL, 34111, 1, 5);
+INSERT INTO `people` VALUES (145, 'Castillo_', 'Alberto', NULL, 34112, 1, 5);
+INSERT INTO `people` VALUES (146, 'Baarir', 'Souheib', NULL, 34113, 1, 5);
+INSERT INTO `people` VALUES (147, 'Delbot', 'François', NULL, 34114, 1, 5);
+INSERT INTO `people` VALUES (148, 'Azhar-Arnal', 'Juliette', NULL, 34115, 1, 5);
+INSERT INTO `people` VALUES (149, 'Rukoz-Castillo', 'Marta', NULL, 34116, 1, 5);
+INSERT INTO `people` VALUES (150, 'Legond-Aubry', 'Fabrice', NULL, 34117, 1, 5);
+INSERT INTO `people` VALUES (151, 'Quinio', 'Bernard', NULL, 34118, 1, 5);
+INSERT INTO `people` VALUES (152, 'Pradat-Peyre', 'Jean-François', NULL, 34119, 1, 5);
+INSERT INTO `people` VALUES (153, 'Ameur', 'Yannick', NULL, 34120, 1, 5);
+INSERT INTO `people` VALUES (154, 'Décallonne', 'Marc', NULL, 34121, 1, 5);
+INSERT INTO `people` VALUES (155, 'Dubois', 'Aloîs', NULL, 34122, 1, 5);
+INSERT INTO `people` VALUES (156, 'Duriez', 'Nathalie', NULL, 34123, 1, 5);
+INSERT INTO `people` VALUES (157, 'Florea', 'Paul', NULL, 34124, 1, 5);
+INSERT INTO `people` VALUES (158, 'Isoard', 'Thierry Michel', NULL, 34125, 1, 5);
+INSERT INTO `people` VALUES (159, 'Latif', 'Youssef', NULL, 34126, 1, 5);
+INSERT INTO `people` VALUES (160, 'Leloir', 'Nicole', NULL, 34127, 1, 5);
+INSERT INTO `people` VALUES (161, 'Novelli', 'Emmanuelle', NULL, 34128, 1, 5);
+INSERT INTO `people` VALUES (162, 'Pujol', 'Nicolas', NULL, 34129, 1, 5);
+INSERT INTO `people` VALUES (163, 'Renaud', 'Francis', NULL, 34130, 1, 5);
+INSERT INTO `people` VALUES (164, 'Serdoun', 'Samy', NULL, 34131, 1, 5);
+INSERT INTO `people` VALUES (165, 'Starck', 'Monia', NULL, 34132, 1, 5);
+INSERT INTO `people` VALUES (166, 'Thomas', 'Aurélie', NULL, 34133, 1, 5);
+INSERT INTO `people` VALUES (167, 'Tourvieille', 'Marc', NULL, 34134, 1, 5);
+INSERT INTO `people` VALUES (168, 'Zamfirou', 'Michel', NULL, 34135, 1, 5);
+INSERT INTO `people` VALUES (169, 'Zilova', 'Jana', NULL, 34136, 1, 5);
+INSERT INTO `people` VALUES (170, 'Menouer', 'Tarek', NULL, 34137, 1, 5);
+INSERT INTO `people` VALUES (171, 'Rodier', 'Lise', NULL, 34138, 1, 5);
+INSERT INTO `people` VALUES (172, 'Angarita Arocha', 'Rafael Enrique', NULL, 34139, 1, 5);
+INSERT INTO `people` VALUES (173, 'Ait Salaht', 'Farah', NULL, 34140, 1, 5);
+INSERT INTO `people` VALUES (174, 'Rousseau', 'Pierre', NULL, 34141, 1, 5);
+INSERT INTO `people` VALUES (175, 'Medjek', 'Sarah', NULL, 34142, 1, 5);
+INSERT INTO `people` VALUES (176, 'Guézou', 'Xavier', NULL, 34143, 1, 5);
+INSERT INTO `people` VALUES (177, 'D_Alfonso', 'Giovanna', NULL, 34144, 1, 5);
+INSERT INTO `people` VALUES (178, 'KELLOU-MENOUER', 'Kenza', NULL, 34145, 1, 5);
+INSERT INTO `people` VALUES (179, 'Oulhaci', 'Faiza', NULL, 34146, 1, 5);
+INSERT INTO `people` VALUES (180, 'Poizat', 'Pascal', NULL, 34147, 1, 5);
+INSERT INTO `people` VALUES (181, 'SADDEM', 'Rim ', NULL, 34148, 1, 5);
+INSERT INTO `people` VALUES (182, 'BENAMMAR', 'Nassima ', NULL, 34149, 1, 5);
+INSERT INTO `people` VALUES (183, 'ARFAOUI', 'Khadija', NULL, 34150, 1, 5);
+INSERT INTO `people` VALUES (184, 'Walter', 'Jean-Marc', NULL, 34151, 1, 5);
+INSERT INTO `people` VALUES (185, 'Bendraou', 'Reda', NULL, 34152, 1, 5);
+INSERT INTO `people` VALUES (186, 'Cojean', 'Bruno', NULL, 34153, 1, 5);
+INSERT INTO `people` VALUES (187, 'Abrantes', 'Pedro', NULL, 34154, 1, 5);
+INSERT INTO `people` VALUES (188, 'Zouari', 'Belhassen', NULL, 34155, 1, 5);
+INSERT INTO `people` VALUES (189, 'HOUHOU', 'Sara ', NULL, 34156, 1, 5);
+INSERT INTO `people` VALUES (190, 'GUEHIS-SAADAOUI', 'Sonia', NULL, 34157, 1, 5);
+INSERT INTO `people` VALUES (191, 'Hillah', 'Lom Messan', NULL, 34158, 1, 5);
+INSERT INTO `people` VALUES (192, 'Hmedeh', 'Zeinab', NULL, 34159, 1, 5);
+INSERT INTO `people` VALUES (193, 'Gherbi', 'Tahar', NULL, 34160, 1, 5);
+INSERT INTO `people` VALUES (194, 'Alaoui', 'Malek', NULL, 34161, 1, 5);
+INSERT INTO `people` VALUES (195, 'Non defini', 'Non defini', NULL, 404, 1, 5);
+INSERT INTO `people` VALUES (196, 'Pierre', 'Laurent', NULL, 34163, 1, 5);
+INSERT INTO `people` VALUES (197, 'Hyon', 'Emmanuel', NULL, 34164, 1, 5);
 
 -- ----------------------------
 -- Table structure for school_years
@@ -455,7 +456,7 @@ CREATE TABLE `school_years`  (
 -- ----------------------------
 -- Records of school_years
 -- ----------------------------
-INSERT INTO `school_years` VALUES (2020);
+INSERT INTO `school_years` VALUES (2019);
 
 -- ----------------------------
 -- Table structure for statuses
@@ -465,11 +466,15 @@ CREATE TABLE `statuses`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of statuses
 -- ----------------------------
-INSERT INTO `statuses` VALUES (1, '');
+INSERT INTO `statuses` VALUES (1, 'ETU');
+INSERT INTO `statuses` VALUES (2, 'PR');
+INSERT INTO `statuses` VALUES (3, 'MCF');
+INSERT INTO `statuses` VALUES (4, 'VAC_EXT');
+INSERT INTO `statuses` VALUES (5, 'VAC_INT');
 
 SET FOREIGN_KEY_CHECKS = 1;
