@@ -17,8 +17,8 @@
       <tr>
           <td>{{ $group->id }}</td>
           <td>{{ $group->name }}</td>
-          <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</button></td>
-          <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer</button></td>
+          <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="{{ $group->id }}" data-name="{{ $group->name }}">Modifier</button></td>
+          <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $group->id }}" data-name="{{ $group->name }}">Supprimer</button></td>
       </tr>
     @endforeach
     </tbody>
@@ -59,13 +59,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Modifier</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
+      <form action="" id="editForm">
+        <div class="modal-body">
+          <input type="hidden"name ="editId">
+          <label for="editId">Nom du groupe</label> : <br/>
+          <input type="text" name ="editName" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Modifier</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -118,6 +122,26 @@
                 });
             }
         })
+    });
+  
+    $('#editModal').on('show.bs.modal', function(e) {
+      var id = $(e.relatedTarget).data('id');
+      var name = $(e.relatedTarget).data('name');
+
+      $(e.currentTarget).find('input[name="editId"]').val(id);
+      $(e.currentTarget).find('input[name="editName"]').val(name);
+    });
+
+    $('#editForm').submit(function(e){
+      e.preventDefault();
+      $.ajax({
+          url:'/Group/EditGroup',
+          type:'POST',
+          data:$(form).serialize(),
+          success:function(data){
+            
+          }
+      });
     });
 
 </script>
