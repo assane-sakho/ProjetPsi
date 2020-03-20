@@ -48,8 +48,8 @@
             data-firstname="{{ $person->firstname }}"
             data-email="{{ $person->email ?? 'Non renseigné' }}"
             data-num="{{ $person->num }}"
-            data-directoryId="{{ $person->directory->id}}"
-            data-statusId="{{ $person->status->id}}">Supprimer</button>
+            data-directory="{{ $person->directory->name}}"
+            data-status="{{ $person->status->title}}">Supprimer</button>
           </td>
       </tr>
     @endforeach
@@ -174,7 +174,7 @@
             <td id="tdDeleteNum"></td>
           </tr>
           <tr>
-            <td>Anuaire</td>
+            <td>Annuaire</td>
             <td id="tdDeleteDirectory"></td>
           </tr>
           <tr>
@@ -267,15 +267,15 @@
     var firstname = $(e.relatedTarget).data('firstname');
     var email = $(e.relatedTarget).data('email');
     var num = $(e.relatedTarget).data('num');
-    var directoryId = $(e.relatedTarget).data('directoryid');
-    var statusId = $(e.relatedTarget).data('statusid');
+    var directory = $(e.relatedTarget).data('directory');
+    var status = $(e.relatedTarget).data('status');
 
     $("#deleteId").val(id);
     $("#deleteName").text(lastname + " " + firstname);
     $("#tdDeleteEmail").text(email);
     $("#tdDeleteNum").text(num);
-    $("#tdDeleteDirectory").text(directoryId);
-    $("#tdDeleteStatus").text(statusId);
+    $("#tdDeleteDirectory").text(directory);
+    $("#tdDeleteStatus").text(status);
   });
 
   function checkIfExist(){

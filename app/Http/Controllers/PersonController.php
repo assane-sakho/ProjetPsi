@@ -17,7 +17,6 @@ class PersonController extends Controller
     }
     function add(Request $request)
     {
-        $id = $request->input("addId");
         $lastName = $request->input("addLastname");
         $firstName = $request->input("addFirstname");
         $email = $request->input("addEmail");
