@@ -1,4 +1,3 @@
-
 </p>
 <button class="btn btn-success" id="addBtn" data-toggle="modal" data-target="#addModal">Ajouter</button>
 </p>

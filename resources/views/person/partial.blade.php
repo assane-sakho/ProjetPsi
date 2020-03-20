@@ -203,7 +203,8 @@
       </div>
       <div class="modal-body">
         <label for="">Fichier : </label>
-        <input type="file" name="fileImport" id="fileImport">
+        <input type="file" id="fileImport" name="fileImport" accept=".xlsx, .xls, .csv"/>
+        <input type="text" id="jsonInput">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger">Importer</button>
@@ -212,9 +213,7 @@
     </div>
   </div>
 </div>
-
 <script>
-  setDataTable();
 
   function appendToSelect(selectId, data)
   {
@@ -227,6 +226,8 @@
 
   $(document).ready(function()
   {
+    setDataTable();
+
     $.get("/Status/GetStatuses", function(data) {
       appendToSelect("addStatus", JSON.parse(data));
       appendToSelect("editStatus", JSON.parse(data));
@@ -236,6 +237,16 @@
     $.get("/Directory/GetDirectories", function(data) {
       appendToSelect("addDirectory", JSON.parse(data));
       appendToSelect("editDirectory", JSON.parse(data));
+    });
+    
+    $('#fileImport').change(function(e)
+    {
+      var jsonData;
+      handleFile(e, function(jsonData)
+      {
+        $("#jsonInput").val(jsonData);
+        console.log(jsonData);
+      });
     });
   })
   

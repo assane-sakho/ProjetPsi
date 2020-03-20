@@ -10,3 +10,5 @@
 <script  src="{{ asset('js/buttons.html5.min.js') }}"></script>
 <script  src="{{ asset('js/buttons.print.min.js') }}"></script>
 <script  src="{{ asset('js/toastr.min.js') }}"></script>
+<script  src="{{ asset('js/xlsx.core.min.js') }}"></script>
+<script  src="{{ asset('js/import.js') }}"></script>
