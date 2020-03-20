@@ -8,8 +8,8 @@ Route::get('/', function () {
 
 /* Group */
 Route::get('/Group/GetPartial', 'GroupController@getPartial');
-Route::get('/Group/AlreadyExist', 'GroupController@alreadyExist');
-Route::get('/Group/AddGroup', 'GroupController@addGroup');
+Route::post('/Group/AlreadyExist', 'GroupController@alreadyExist');
+Route::post('/Group/AddGroup', 'GroupController@addGroup');
 
 /* Person */
 Route::get('/Person/GetPartial', 'PersonController@getPartial');

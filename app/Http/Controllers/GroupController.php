@@ -13,4 +13,18 @@ class GroupController extends Controller
       
         return view('group.partial', compact('groups'));
     }
+
+    function alreadyExist(Request $request)
+    {
+        $groupeCount = Group::where(['name' => $request->input("groupeName")])->count();
+        if($groupeCount == 0)
+            return json_encode(false);
+        return json_encode(true);
+    }
+
+    function addGroup(Request $request)
+    {
+        $groupe = Group::create(['name' => $request->input("groupeName")]);
+        return true;
+    }
 }
