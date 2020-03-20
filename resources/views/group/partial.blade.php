@@ -2,7 +2,7 @@
 </p>
 
 </p>
-<div class="table-responsive">
+<div class="table-responsive" id="dataTable">
   <table class="table table-striped table-sm">
     <thead>
       <tr>

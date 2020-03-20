@@ -22,13 +22,13 @@ class GroupController extends Controller
         return json_encode(true);
     }
 
-    function addGroup(Request $request)
+    function add(Request $request)
     {
         $groupe = Group::create(['name' => $request->input("groupeName")]);
         return true;
     }
 
-    function editGroup(Request $request)
+    function update(Request $request)
     {
         $id = $request->input("editId");
         $name = $request->input("editName");
@@ -36,12 +36,11 @@ class GroupController extends Controller
         $group-> update(['name' => $name]);
     }
 
-    function deleteGroup(Request $request)
+    function delete(Request $request)
     {
         $id = $request->input("deleteId");
         $group = Group::where('id',$id);
         $group-> delete();
         echo $id;
     }
-
 }

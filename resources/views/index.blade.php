@@ -11,7 +11,7 @@
 @section('scripts')
 
 <script>
-    setPage('Association', true);
+    setPage('Person', true);
 
     function setPage(page, d)
     {
@@ -62,8 +62,8 @@
     function setDataTable()
     {
       var fileName = $("title").text() + " - " +  $("#title").text();
-      $(".table").DataTable().destroy();
-      $(".table").DataTable({
+      $("#dataTable").DataTable().destroy();
+      $("#dataTable").DataTable({
         "language" : {
             "sEmptyTable":     "Aucune donnée disponible dans le tableau",
             "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",

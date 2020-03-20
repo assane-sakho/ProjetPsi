@@ -9,13 +9,17 @@ Route::get('/', function () {
 /* Group */
 Route::get('/Group/GetPartial', 'GroupController@getPartial');
 Route::post('/Group/AlreadyExist', 'GroupController@alreadyExist');
-Route::post('/Group/AddGroup', 'GroupController@addGroup');
-Route::post('/Group/EditGroup', 'GroupController@editGroup');
-Route::post('/Group/DeleteGroup', 'GroupController@deleteGroup');
+Route::post('/Group/Add', 'GroupController@add');
+Route::post('/Group/Edit', 'GroupController@update');
+Route::post('/Group/Delete', 'GroupController@delete');
 
 /* Person */
 Route::get('/Person/GetPartial', 'PersonController@getPartial');
-Route::get('/Person/GetAddModal', 'PersonController@getAddModal');
+Route::post('/Person/AlreadyExist', 'PersonController@alreadyExist');
+Route::post('/Person/Add', 'PersonController@add');
+Route::post('/Person/Update', 'PersonController@update');
+Route::post('/Person/Delete', 'PersonController@delete');
+
 
 /* GroupPersonYear */
 Route::get('/Association/GetPartial', 'GroupPersonYearController@getPartial');

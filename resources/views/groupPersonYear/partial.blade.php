@@ -4,7 +4,7 @@
 </p>
 
 <div class="table-responsive">
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm" id="dataTable">
     <thead>
       <tr>
         <th>#<br/>Groupe</th>
@@ -101,8 +101,6 @@
     </div>
   </div>
 </div>
-
-
 
 <script>
   setDataTable();
