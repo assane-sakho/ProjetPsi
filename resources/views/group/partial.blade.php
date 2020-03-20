@@ -62,9 +62,9 @@
       <form action="" id="editForm">
         <div class="modal-body">
           @csrf
-          <input type="hidden"name ="editId">
+          <input type="hidden" name ="editId" id="editId">
           <label for="editName">Nom du groupe</label> : <br/>
-          <input type="text" name ="editName" class="form-control">
+          <input type="text" name ="editName" id="editName" class="form-control">
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Modifier</button>
@@ -87,7 +87,7 @@
       <form action="" id="deleteForm">
         <div class="modal-body">
           @csrf
-          <input type="hidden" name="deleteId">
+          <input type="hidden" name="deleteId" id="deleteId">
           <span id="deleteMessage"> </span>
         </div>
         <div class="modal-footer">
@@ -106,7 +106,7 @@
         return $.ajax({
             url:'/Group/AlreadyExist',
             type:'POST',
-            data:$(form).serialize(),
+            data:$("#addForm").serialize(),
         });
     }
 
@@ -122,26 +122,16 @@
                     type:'POST',
                     data:$("#addForm").serialize(),
                     success:function(data){
+                      displayToastr("saved");
+                      setPage('Group', false);
+                    },
+                    error: function(){
+                      displayToastr("error");
                     }
                 });
             }
-        })
-    });
-  
-    $('#editModal').on('show.bs.modal', function(e) {
-      var id = $(e.relatedTarget).data('id');
-      var name = $(e.relatedTarget).data('name');
-
-      $(e.currentTarget).find('input[name="editId"]').val(id);
-      $(e.currentTarget).find('input[name="editName"]').val(name);
-    });
-
-    $('#deleteModal').on('show.bs.modal', function(e) {
-      var id = $(e.relatedTarget).data('id');
-      var name = $(e.relatedTarget).data('name');
-
-      $(e.currentTarget).find('input[name="deleteId"]').val(id);
-      $("#deleteMessage").text("Voulez-vous supprimer le groupe " + name + " ?");
+        });
+        $('#addModal').modal('toggle');
     });
 
     $('#editForm').submit(function(e){
@@ -151,9 +141,15 @@
           type:'POST',
           data:$("#editForm").serialize(),
           success:function(data){
-             
+             displayToastr("updated");
+             setPage('Group', false);
+          },
+          error: function()
+          {
+            displayToastr("error");
           }
       });
+      $('#editModal').modal('toggle');
     });
 
     $('#deleteForm').submit(function(e){
@@ -163,9 +159,31 @@
           type:'POST',
           data:$("#deleteForm").serialize(),
           success:function(data){
-          
+            displayToastr("deleted");
+            setPage('Group', false);
+          },
+          error: function()
+          {
+            displayToastr("error");
           }
       });
+      $('#deleteModal').modal('toggle');
+    });
+
+    $('#editModal').on('show.bs.modal', function(e) {
+      var id = $(e.relatedTarget).data('id');
+      var name = $(e.relatedTarget).data('name');
+
+      $("#editId").val(id);   
+      $("#editName").val(name);   
+    });
+
+    $('#deleteModal').on('show.bs.modal', function(e) {
+      var id = $(e.relatedTarget).data('id');
+      var name = $(e.relatedTarget).data('name');
+
+      $("#deleteId").val(id);   
+      $("#deleteMessage").text("Voulez-vous supprimer le groupe " + name + " ?");
     });
 
 </script>

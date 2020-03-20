@@ -46,8 +46,8 @@ CREATE TABLE `group_person_year`  (
   INDEX `group_person_year_person_id_foreign`(`person_id`) USING BTREE,
   INDEX `group_person_year_year_foreign`(`year`) USING BTREE,
   CONSTRAINT `group_person_year_year_foreign` FOREIGN KEY (`year`) REFERENCES `school_years` (`year`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `group_person_year_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `group_person_year_person_id_foreign` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `group_person_year_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `group_person_year_person_id_foreign` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------

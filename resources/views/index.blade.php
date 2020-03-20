@@ -11,52 +11,52 @@
 @section('scripts')
 
 <script>
-    setPage('Association');
+    setPage('Association', true);
 
-    function setPage(page)
+    function setPage(page, d)
     {
+        $("nav").find("a").removeClass("active");
+        $("#" + page + "Anchor").addClass("active");
 
-      $("nav").find("a").removeClass("active");
-      $("#" + page + "Anchor").addClass("active");
+        var title = "Informations";
 
-      var title = "Informations";
+        if(page != "API")
+        {
+          title += " des ";
+        }
 
-      if(page != "API")
-      {
-        title += " des ";
-      }
+        switch(page){
+          case "Association" :
+              title += " appartenances des individus aux groupes";
+            break; 
+          case "Group" :
+            title += "groupes";
+            break;
+          case "Person" :
+            title += "individus";
+            break;
+          case "API":
+            title += " de l'API";
+            break;
+        }
 
-      switch(page){
-        case "Association" :
-            title += " appartenances des individus aux groupes";
-          break; 
-        case "Group" :
-          title += "groupes";
-          break;
-        case "Person" :
-          title += "individus";
-          break;
-        case "API":
-          title += " de l'API";
-          break;
-      }
-
-      $("#title").text(title);
-
-      $.ajax({
-          url:'/' + page + '/GetPartial',
-          type:'GET',
-          success:function(data){
-            displayToastr('loaded');
-            $("#content").empty();
-            $("#content").append(data);
-          },
-          error : function()
-          {
-            displayToastr('error');
-          } 
-      });
-
+        $("#title").text(title);
+        $.ajax({
+            url:'/' + page + '/GetPartial',
+            type:'GET',
+            success:function(data){
+              if(d == true)
+              {
+                displayToastr('loaded');
+              }
+              $("#content").empty();
+              $("#content").append(data);
+            },
+            error : function()
+            {
+              displayToastr('error');
+            } 
+        });
     }
 
     function setDataTable()
@@ -117,17 +117,20 @@
       toastr.clear();
       
       switch(type){
-        case "save":
+        case "saved":
           toastr.success('Les données ont été ajoutés.'), title;
           break;
         case "error":
           toastr.error('Une erreur est survenue.', title);
           break;
-        case "update":
-          toastr.success('Les modifications ont été enregistrés.'), title;
+        case "updated":
+          toastr.success('Les modifications ont été enregistrés.', title);
           break;
         case "loaded":
-          toastr.success('Les données ont été chargées.'), title;
+          toastr.success('Les données ont été chargés.', title);
+          break;
+        case "deleted":
+          toastr.info('Les données ont été supprimés.', title);
           break;
       }
     }

@@ -15,9 +15,16 @@ Route::post('/Group/DeleteGroup', 'GroupController@deleteGroup');
 
 /* Person */
 Route::get('/Person/GetPartial', 'PersonController@getPartial');
+Route::get('/Person/GetAddModal', 'PersonController@getAddModal');
 
 /* GroupPersonYear */
 Route::get('/Association/GetPartial', 'GroupPersonYearController@getPartial');
+
+/* Status */
+Route::get('/Status/GetStatuses', 'StatusController@getStatuses');
+
+/* Directory */
+Route::get('/Directory/GetDirectories', 'DirectoryController@getDirectories');
 
 /* API */
 Route::get('/API/GetPartial', 'APIController@getPartial');

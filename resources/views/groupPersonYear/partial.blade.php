@@ -1,7 +1,7 @@
 
 </p>
 <button class="btn btn-success" id="addBtn" data-toggle="modal" data-target="#addModal">Ajouter</button>
-<button class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal">Importer</button></p>
+</p>
 
 <div class="table-responsive">
   <table class="table table-striped table-sm">

@@ -1,5 +1,6 @@
 </p>
-<button class="btn btn-success" id="addBtn" data-toggle="modal" data-target="#addModal">Ajouter</button></p>
+<button class="btn btn-success" id="addModalBtn" data-toggle="modal" data-target="#addModal">Ajouter</button>
+<button class="btn btn-primary" id="addBtn" data-toggle="modal" data-target="#addModal">Importer</button></p>
 
 <div class="table-responsive">
   <table class="table table-striped table-sm">
@@ -43,13 +44,37 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Enregistrer</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
+      <form action="" id="addForm">
+        <div class="modal-body" id="addModalBody">
+          <label for="addLastname">Nom :</label></br>
+          <input type="text" name="addLastname" id="addLastName" class="form-control" required><br/>
+
+          <label for="addFirstname">Prénom :</label></br>
+          <input type="text" name="addFirstname" id="addFirstname" class="form-control" required><br/>
+
+          <label for="addFirstname">Email :</label></br>
+          <input type="text" name="addEmail" id="addEmail" class="form-control"><br/>
+          
+          <label for="addFirstname">Num :</label></br>
+          <input type="number" name="addNum" id="addNum" class="form-control" required><br/>
+          
+          <label for="addDirectory">Annuaire :</label></br>
+          <select name="addDirectory" id="addDirectory" class="form-control" required>
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </p>
+
+          <label for="addStatus">Status :</label></br>
+          <select name="addStatus" id="addStatus" class="form-control" required>
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </br>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </from>
     </div>
   </div>
 </div>
@@ -98,4 +123,26 @@
 
 <script>
   setDataTable();
+  function appendToSelect(selectId, data)
+  {
+      $.each(data, function(key, value) {   
+        $('#' + selectId).append($("<option></option>")
+              .attr("value",value.id)
+              .text(value.title ?? value.name)); 
+      });
+  }
+  $(document).ready(function()
+  {
+    $.get("/Status/GetStatuses", function(data) {
+      appendToSelect("addStatus", JSON.parse(data));
+    });
+
+    $.get("/Directory/GetDirectories", function(data) {
+        appendToSelect("addDirectory", JSON.parse(data));
+    });
+  })
+  
+  $('#addModal').on('show.bs.modal', function(e) {
+    $("#addLastName, #addFirstname, #addEmail, #addNum").val("");
+  });
 </script>
