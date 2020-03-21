@@ -14,6 +14,7 @@ class GroupPersonYear extends Migration
     public function up()
     {
         Schema::create('group_person_year', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('year');

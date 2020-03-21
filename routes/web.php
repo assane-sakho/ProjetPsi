@@ -6,16 +6,29 @@ Route::get('/', function () {
     return view('index');
 });
 
-/* Group */
-Route::get('/Group/GetPartial', 'GroupController@getPartial');
-Route::get('/Group/AlreadyExist', 'GroupController@alreadyExist');
-Route::get('/Group/AddGroup', 'GroupController@addGroup');
+/* Groups */
+Route::get('/Groups/GetPartial', 'GroupController@getPartial');
+Route::post('/Groups/AlreadyExist', 'GroupController@alreadyExist');
+Route::post('/Groups/Add', 'GroupController@add');
+Route::post('/Groups/Update', 'GroupController@update');
+Route::post('/Groups/Delete', 'GroupController@delete');
 
-/* Person */
-Route::get('/Person/GetPartial', 'PersonController@getPartial');
+/* People */
+Route::get('/People/GetPartial', 'PersonController@getPartial');
+Route::post('/People/AlreadyExist', 'PersonController@alreadyExist');
+Route::post('/People/Add', 'PersonController@add');
+Route::post('/People/Update', 'PersonController@update');
+Route::post('/People/Delete', 'PersonController@delete');
 
-/* GroupPersonYear */
-Route::get('/Association/GetPartial', 'GroupPersonYearController@getPartial');
+
+/* GroupPersonYears */
+Route::get('/Associations/GetPartial', 'GroupPersonYearController@getPartial');
+
+/* Status */
+Route::get('/Status/GetStatuses', 'StatusController@getStatuses');
+
+/* Directory */
+Route::get('/Directory/GetDirectories', 'DirectoryController@getDirectories');
 
 /* API */
 Route::get('/API/GetPartial', 'APIController@getPartial');

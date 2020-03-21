@@ -2,25 +2,25 @@
     <div class="sidebar-sticky">
     <ul class="nav flex-column">
         <li class="nav-item">
-        <a class="nav-link" id="AssociationAnchor" href="#" onclick="setPage('Association')">
+        <a class="nav-link" id="AssociationsAnchor" href="#Associations" onclick="setPage('Associations', true)">
             <span data-feather="home"></span>
             Appartenance
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" id="GroupAnchor" href="#" onclick="setPage('Group')">
+        <a class="nav-link" id="GroupsAnchor" href="#Groups" onclick="setPage('Groups', true)">
             <span data-feather="home"></span>
             Groupes
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" id="PersonAnchor" href="#" onclick="setPage('Person')">
+        <a class="nav-link" id="PeopleAnchor" href="#People" onclick="setPage('People', true)">
             <span data-feather="users"></span>
             Individus
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" id="APIAnchor" href="#" onclick="setPage('API')">
+        <a class="nav-link" id="APIAnchor" href="#API" onclick="setPage('API', true)">
             <span data-feather="layers"></span>
             API
         </a>
