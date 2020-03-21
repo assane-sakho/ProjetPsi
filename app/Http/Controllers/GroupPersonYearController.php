@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\GroupPersonYear;
+use App\SchoolYear;
+
 use GroupPersonYear as GlobalGroupPersonYear;
 
 class GroupPersonYearController extends Controller
@@ -17,6 +19,12 @@ class GroupPersonYearController extends Controller
 
     function alreadyExist(Request $request)
     {
+        $year = SchoolYear::find($request->year);
+        if($year == null)
+        {
+            SchoolYear::create(['year' => $request->year]);
+        }
+
         $association = GroupPersonYear::where([
             'group_id' => $request->groupId,
             'person_id' => $request->personId,

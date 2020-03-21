@@ -165,7 +165,7 @@
 </div>
 
 <script>
-  setDataTable();
+
  
   $(document).ready(function()
   {
@@ -183,6 +183,25 @@
     $.get("/SchoolYears/GetAll", function(data) {
       appendToSelect("selectAddYear", JSON.parse(data));
       appendToSelect("selectEditYear", JSON.parse(data));
+    });
+
+    $("#selectAddYear").select2('destroy'); 
+    $('#selectAddYear').select2({
+        tags: true,
+        tokenSeparators: [",", " "],
+        createTag: function (tag) {
+        if(!isNaN(tag.term) && tag.term.length == 4){
+          return {
+              id: tag.term,
+              text: tag.term + " - " + (parseInt(tag.term)+1),
+              isNew : true
+          };
+          }
+        else
+        {
+            
+        }
+      }
     });
 
   });
