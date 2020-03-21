@@ -36,7 +36,15 @@
             <td>{{ $association->person->status->title }}</td>
             <td>{{ $association->year }} - {{ $association->year + 1 }} </td>
             <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</button></td>
-            <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Supprimer</button></td>
+            <td class="not-export-col">
+              <button class="btn btn-danger" 
+              data-toggle="modal"
+              data-target="#deleteModal"
+              data-id="{{ $association->id }}"
+              data-name="{{ $association->person->firstname .' '.$association->person->lastname }}"
+              data-year="{{ $association->year }}"
+              data-groupname="{{ $association->group->name}}">Supprimer</button>
+            </td>
       </tr>
     @endforeach 
       </tbody>
@@ -87,17 +95,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Supprimer l'individu</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer l'association</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Oui</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+      <form action="" id="deleteForm">
+      <input type="hidden" name="deleteId" id="deleteId">
+        @csrf
+        <div class="modal-body">
+          Voulez-vous suppripmer l'association de <b id="deleteMessage"></b> ?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Supprimer</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </form>
       </div>
     </div>
   </div>
@@ -105,4 +120,15 @@
 
 <script>
   setDataTable();
+
+  $('#deleteModal').on('show.bs.modal', function(e) {
+    var id = $(e.relatedTarget).data('id');
+    var name = $(e.relatedTarget).data('name');
+    var year = $(e.relatedTarget).data('year');
+    var groupname = $(e.relatedTarget).data('groupname');
+
+    $("#deleteId").val(id);
+    $("#deleteMessage").text(name + " en " + year + " pour le groupe " + groupname);
+
+  });
 </script>
