@@ -41,4 +41,10 @@ class GroupController extends Controller
         $group = Group::where('id',$id);
         $group-> delete();
     }
+
+    function getAll()
+    {
+        $groups = Group::all();
+        return json_encode($groups);
+    }
 }

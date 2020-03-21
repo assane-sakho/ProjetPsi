@@ -64,6 +64,7 @@
               }
               $("#content").empty();
               $("#content").append(data);
+              setSelect2();
             },
             error : function()
             {
@@ -149,6 +150,43 @@
           toastr.warning("<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> Attention<p/>" + message, title);
           break;
       }
+    }
+
+    function appendToSelect(selectId, data)
+    {
+      var optionText;
+      var optionId;
+
+      $.each(data, function(key, value) { 
+        optionId = value.id;
+
+        if(value.title)
+        {
+          optionText = value.title;
+        }
+        else if(value.name)
+        {
+          optionText = value.name;
+        }
+        else if(value.year)
+        {
+          optionId = value.year;
+          optionText = value.year + " - " + (value.year+1);
+        }
+        else
+        {
+          optionText = value.firstname + " " + value.lastname;
+        }
+
+        $('#' + selectId).append($("<option></option>")
+              .attr("value",optionId)
+              .text(optionText)); 
+      });
+    }
+
+    function setSelect2()
+    {
+      $("select").select2();
     }
 </script>
 @endsection

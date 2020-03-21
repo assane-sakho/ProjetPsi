@@ -87,4 +87,9 @@ class PersonController extends Controller
         $group-> delete();
     }
 
+    public function getAll()
+    {
+        $people = Person::all();
+        return json_encode($people);
+    }
 }

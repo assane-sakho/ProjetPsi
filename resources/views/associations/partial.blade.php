@@ -35,7 +35,15 @@
             <td>{{ $association->person->directory->name}}</td>
             <td>{{ $association->person->status->title }}</td>
             <td>{{ $association->year }} - {{ $association->year + 1 }} </td>
-            <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</button></td>
+            <td class="not-export-col">
+              <button class="btn btn-warning" 
+              data-toggle="modal"
+              data-target="#editModal"
+              data-id="{{ $association->id }}"
+              data-name="{{ $association->person->firstname . ' ' . $association->person->lastname }}"
+              data-groupid="{{ $association->group->id }}"
+              data-year="{{ $association->year }}">Modifier</button>
+            </td>
             <td class="not-export-col">
               <button class="btn btn-danger" 
               data-toggle="modal"
@@ -46,27 +54,45 @@
               data-groupname="{{ $association->group->name}}">Supprimer</button>
             </td>
       </tr>
-    @endforeach 
+      @endforeach 
       </tbody>
   </table>
 </div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal"  role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un individu</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter une association</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Enregistrer</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
+      <form action="" id="addForm">
+        @csrf
+        <div class="modal-body">
+        <label for="selectAddGroup">Groupe :</label></br>
+          <select name="selectAddGroup" id="selectAddGroup" class="form-control" required style="width: 400px">
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </p>
+          <label for="selectAddPerson">Individu :</label></br>
+          <select name="selectAddPerson" id="selectAddPerson" class="form-control" required style="width: 400px">
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </p>
+
+          <label for="selectAddYear">Année :</label></br>
+          <select name="selectAddYear" id="selectAddYear" class="form-control" required style="width: 400px">
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </br>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -75,18 +101,39 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier un individu</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier une association</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Modifier</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
+      <form action="" id="editForm">
+      <input type="hidden" name="editId" id="editId">
+      <input type="hidden" name="editOldNum" id="editOldNum">
+      <input type="hidden" name="editOldLastname" id="editOldLastname">
+      <input type="hidden" name="editOldFirstname" id="editOldFirstname">
+        @csrf
+        <div class="modal-body">
+        <label for="selectEditGroup">Groupe :</label></br>
+          <select name="selectEditGroup" id="selectEditGroup" class="form-control" required style="width: 400px">
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </p>
+          <label for="editPerson">Individu :</label></br>
+          <b id="editPerson" name="editPerson"></b>
+          </select>
+          </p>
+
+          <label for="selectEditYear">Année :</label></br>
+          <select name="selectEditYear" id="selectEditYear" class="form-control" required style="width: 400px">
+            <option value=""> -- Sélectionnez une option -- </option>
+          </select>
+          </br>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Modifier</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -120,6 +167,43 @@
 
 <script>
   setDataTable();
+ 
+  $(document).ready(function()
+  {
+    setDataTable();
+
+    $.get("/People/GetAll", function(data) {
+      appendToSelect("selectAddPerson", JSON.parse(data));
+    });
+
+    $.get("/Groups/GetAll", function(data) {
+      appendToSelect("selectAddGroup", JSON.parse(data));
+      appendToSelect("selectEditGroup", JSON.parse(data));
+    });
+
+    $.get("/SchoolYears/GetAll", function(data) {
+      appendToSelect("selectAddYear", JSON.parse(data));
+      appendToSelect("selectEditYear", JSON.parse(data));
+    });
+
+  });
+
+  $('#addModal').on('show.bs.modal', function(e) {
+    $("select").val("").change();
+  });
+
+  $('#editModal').on('show.bs.modal', function(e) {
+    $("select").val("").change();
+    var id = $(e.relatedTarget).data('id');
+    var name = $(e.relatedTarget).data('name');
+    var groupid = $(e.relatedTarget).data('groupid');
+    var year = $(e.relatedTarget).data('year');
+
+    $("#editId").val(id);
+    $("#editPerson").text(name);
+    $("#selectEditGroup").val(groupid).change();
+    $("#selectEditYear").val(year).change();
+  });
 
   $('#deleteModal').on('show.bs.modal', function(e) {
     var id = $(e.relatedTarget).data('id');

@@ -82,13 +82,13 @@
           <input type="number" name="addNum" id="addNum" class="form-control" required><br/>
           
           <label for="addDirectory">Annuaire :</label></br>
-          <select name="addDirectory" id="addDirectory" class="form-control" required>
+          <select name="addDirectory" id="addDirectory" class="form-control" required style="width: 400px">
             <option value=""> -- Sélectionnez une option -- </option>
           </select>
           </p>
 
           <label for="addStatus">Status :</label></br>
-          <select name="addStatus" id="addStatus" class="form-control" required>
+          <select name="addStatus" id="addStatus" class="form-control" required style="width: 400px">
             <option value=""> -- Sélectionnez une option -- </option>
           </select>
           </br>
@@ -131,13 +131,13 @@
           <input type="number" name="editNum" id="editNum" class="form-control" required><br/>
           
           <label for="editDirectory">Annuaire :</label></br>
-          <select name="editDirectory" id="editDirectory" class="form-control" required>
+          <select name="editDirectory" id="editDirectory" class="form-control" required style="width: 400px">
             <option value=""> -- Sélectionnez une option -- </option>
           </select>
           </p>
 
           <label for="editStatus">Status :</label></br>
-          <select name="editStatus" id="editStatus" class="form-control" required>
+          <select name="editStatus" id="editStatus" class="form-control" required style="width: 400px">
             <option value=""> -- Sélectionnez une option -- </option>
           </select>
           </br>
@@ -231,30 +231,23 @@
 </div>
 <script>
 
-  function appendToSelect(selectId, data)
-  {
-      $.each(data, function(key, value) {   
-        $('#' + selectId).append($("<option></option>")
-              .attr("value",value.id)
-              .text(value.title ?? value.name)); 
-      });
-  }
-
   $(document).ready(function()
   {
     setDataTable();
 
-    $.get("/Status/GetStatuses", function(data) {
+    $.get("/Status/GetAll", function(data) {
       appendToSelect("addStatus", JSON.parse(data));
       appendToSelect("editStatus", JSON.parse(data));
 
     });
 
-    $.get("/Directory/GetDirectories", function(data) {
+    $.get("/Directory/GetAll", function(data) {
       appendToSelect("addDirectory", JSON.parse(data));
       appendToSelect("editDirectory", JSON.parse(data));
     });
     
+    setSelect2();
+
     $('#fileImport').change(function(e)
     {
       var jsonData;

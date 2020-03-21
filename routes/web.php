@@ -12,6 +12,7 @@ Route::post('/Groups/AlreadyExist', 'GroupController@alreadyExist');
 Route::post('/Groups/Add', 'GroupController@add');
 Route::post('/Groups/Update', 'GroupController@update');
 Route::post('/Groups/Delete', 'GroupController@delete');
+Route::Get('/Groups/GetAll', 'GroupController@getAll');
 
 /* People */
 Route::get('/People/GetPartial', 'PersonController@getPartial');
@@ -19,16 +20,19 @@ Route::post('/People/AlreadyExist', 'PersonController@alreadyExist');
 Route::post('/People/Add', 'PersonController@add');
 Route::post('/People/Update', 'PersonController@update');
 Route::post('/People/Delete', 'PersonController@delete');
+Route::Get('/People/GetAll', 'PersonController@getAll');
 
+/* SchoolYears */
+Route::get('/SchoolYears/GetAll', 'SchoolYearController@getAll');
 
 /* GroupPersonYears */
 Route::get('/Associations/GetPartial', 'GroupPersonYearController@getPartial');
 
 /* Status */
-Route::get('/Status/GetStatuses', 'StatusController@getStatuses');
+Route::get('/Status/GetAll', 'StatusController@getAll');
 
 /* Directory */
-Route::get('/Directory/GetDirectories', 'DirectoryController@getDirectories');
+Route::get('/Directory/GetAll', 'DirectoryController@getAll');
 
 /* API */
 Route::get('/API/GetPartial', 'APIController@getPartial');

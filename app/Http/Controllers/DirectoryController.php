@@ -7,7 +7,7 @@ use App\Directory;
 
 class DirectoryController extends Controller
 {
-    public function getDirectories()
+    public function getAll()
     {
         $directories = Directory::all();
         return json_encode($directories);

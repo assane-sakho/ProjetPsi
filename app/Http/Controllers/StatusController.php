@@ -7,7 +7,7 @@ use App\Status;
 
 class StatusController extends Controller
 {
-    public function getStatuses()
+    public function getAll()
     {
         $statuses = Status::all();
         return json_encode($statuses);
