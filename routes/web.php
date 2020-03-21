@@ -32,3 +32,4 @@ Route::get('/Directory/GetDirectories', 'DirectoryController@getDirectories');
 
 /* API */
 Route::get('/API/GetPartial', 'APIController@getPartial');
+Route::get('/API/GetAssociation', 'APIController@getAssociation');
