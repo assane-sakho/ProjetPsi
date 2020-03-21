@@ -27,6 +27,10 @@ Route::get('/SchoolYears/GetAll', 'SchoolYearController@getAll');
 
 /* GroupPersonYears */
 Route::get('/Associations/GetPartial', 'GroupPersonYearController@getPartial');
+Route::post('/Associations/AlreadyExist', 'GroupPersonYearController@alreadyExist');
+Route::post('/Associations/Add', 'GroupPersonYearController@add');
+Route::post('/Associations/Update', 'GroupPersonYearController@update');
+Route::post('/Associations/Delete', 'GroupPersonYearController@delete');
 
 /* Status */
 Route::get('/Status/GetAll', 'StatusController@getAll');

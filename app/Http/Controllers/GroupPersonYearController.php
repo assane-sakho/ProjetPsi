@@ -15,20 +15,34 @@ class GroupPersonYearController extends Controller
         return view('associations.partial', compact('associations'));
     }
 
+    function alreadyExist(Request $request)
+    {
+        $association = GroupPersonYear::where([
+            'group_id' => $request->groupId,
+            'person_id' => $request->personId,
+            'year' => $request->year])->count();
+
+        if($association == 0)
+        {
+            return json_encode(false);
+        }
+        return json_encode(true);
+    }
+
     function add(Request $request)
     {
-        $groupId = $request->input("addGroup");
-        $personId = $request->input("addPerson");
-        $year = $request->input("addYear");
+        $groupId = $request->input("selectAddGroup");
+        $personId = $request->input("selectAddPerson");
+        $year = $request->input("selectAddYear");
 
         $groupe = GroupPersonYear::create(['group_id' => $groupId,'person_id' => $personId,'year' => $year]);
     }
     
     function update(Request $request)
     {
-        $id = $request->input("editGroupPersonYearId");
-        $groupId = $request->input("editGroup");
-        $year = $request->input("editYear");
+        $id = $request->input("editId");
+        $groupId = $request->input("selectEditGroup");
+        $year = $request->input("selectEditYear");
 
         $group = GroupPersonYear::where('id',$id);
         $group-> update(['group_id' => $groupId,'year' => $year]);

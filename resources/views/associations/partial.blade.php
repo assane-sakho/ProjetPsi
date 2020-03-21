@@ -40,6 +40,7 @@
               data-toggle="modal"
               data-target="#editModal"
               data-id="{{ $association->id }}"
+              data-personid="{{ $association->person->id }}"
               data-name="{{ $association->person->firstname . ' ' . $association->person->lastname }}"
               data-groupid="{{ $association->group->id }}"
               data-year="{{ $association->year }}">Modifier</button>
@@ -108,9 +109,7 @@
       </div>
       <form action="" id="editForm">
       <input type="hidden" name="editId" id="editId">
-      <input type="hidden" name="editOldNum" id="editOldNum">
-      <input type="hidden" name="editOldLastname" id="editOldLastname">
-      <input type="hidden" name="editOldFirstname" id="editOldFirstname">
+      <input type="hidden" name="editPersonId" id="editPersonId">
         @csrf
         <div class="modal-body">
         <label for="selectEditGroup">Groupe :</label></br>
@@ -196,10 +195,12 @@
     $("select").val("").change();
     var id = $(e.relatedTarget).data('id');
     var name = $(e.relatedTarget).data('name');
+    var personId = $(e.relatedTarget).data('personid');
     var groupid = $(e.relatedTarget).data('groupid');
     var year = $(e.relatedTarget).data('year');
 
     $("#editId").val(id);
+    $("#editPersonId").val(personId);
     $("#editPerson").text(name);
     $("#selectEditGroup").val(groupid).change();
     $("#selectEditYear").val(year).change();
@@ -215,4 +216,108 @@
     $("#deleteMessage").text(name + " en " + year + " pour le groupe " + groupname);
 
   });
+
+  function checkIfExist(formData){
+        return $.ajax({
+            url:'/Associations/AlreadyExist',
+            type:'POST',
+            data: formData
+        });
+  }
+  
+  $('#addForm').submit(function(e){
+      e.preventDefault();
+      var formData = $("#addForm").serialize();
+    
+      var groupId = $("#selectAddGroup").val();
+      var personId = $("#selectAddPerson").val();
+      var year = $("#selectAddYear").val();
+
+      var data = formData + 
+      "&groupId=" +  groupId + 
+      "&personId=" +  personId + 
+      "&year=" +  year;
+
+      checkIfExist(data).then(function(response)
+      {
+          if (response == 'false')
+          {
+              $.ajax({
+                  url:'/Associations/Add',
+                  type:'POST',
+                  data: formData,
+                  success:function(data){
+                    displayToastr("saved");
+                    setPage('Associations', false); 
+                  },
+                  error: function(){
+                    displayToastr("error");
+                  }
+              });
+              $('#addModal').modal('toggle');
+          }
+          else
+          {
+            displayToastr('warning', 'Une association entre ce groupe, cet individu et pour l\'année sélectionnée existe déjà')
+          }
+      });
+  });
+
+  $('#editForm').submit(function(e){
+    e.preventDefault();
+
+    var formData = $("#editForm").serialize();
+
+    var groupId = $("#selectEditGroup").val();
+    var personId = $("#editPersonId").val();
+    var year = $("#selectEditYear").val();
+
+    var data = formData + 
+    "&groupId=" +  groupId + 
+    "&personId=" +  personId + 
+    "&year=" +  year;
+    
+    checkIfExist(data).then(function(response)
+    {
+      if (response == 'false')
+      {
+          $.ajax({
+              url:'/Associations/Update',
+              type:'POST',
+              data:formData,
+              success:function(data){
+                displayToastr("updated");
+                setPage('Associations', false);
+              },
+              error: function(){
+                displayToastr("error");
+              }
+          });
+          $('#editModal').modal('toggle');
+      }
+      else
+      {
+        displayToastr('warning', 'Une association entre ce groupe, cet individu et pour l\'année sélectionnée existe déjà')
+      }
+    });
+  });
+
+  $('#deleteForm').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+        url:'/Associations/Delete',
+        type:'POST',
+        data:$("#deleteForm").serialize(),
+        success:function(data){
+          displayToastr("deleted");
+          setPage('Associations', false);  
+        },
+        error: function()
+        {
+          displayToastr("error");
+        }
+    });
+    $('#deleteModal').modal('toggle');
+  });
+
 </script>
