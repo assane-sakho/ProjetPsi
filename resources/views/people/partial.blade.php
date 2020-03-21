@@ -207,7 +207,20 @@
       <div class="modal-body">
         <label for="">Fichier : </label>
         <input type="file" id="fileImport" name="fileImport" accept=".xlsx, .xls, .csv"/>
-        <input type="text" id="jsonInput">
+        <h3>Résultat:</h3>
+        <table id="tableImport" class="table">
+          <thead>
+            <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Annuaire</td>
+            <td>Numéro</td>
+            <td>Statut</td>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger">Importer</button>
@@ -247,8 +260,22 @@
       var jsonData;
       handleFile(e, function(jsonData)
       {
-        $("#jsonInput").val(jsonData);
         console.log(jsonData);
+
+        var yourval = JSON.parse(jsonData);
+        console.error('JSON recived :',yourval);
+
+        $('#tableImport').DataTable( {
+            data: yourval,
+            columns: [
+                { data: 'Nom' },
+                { data: 'Prenom' },
+                { data: 'Email' },
+                { data: 'Annuaire' },
+                { data: 'Statut' }
+            ]
+        } );
+
       });
     });
   })
