@@ -196,7 +196,7 @@
 </div>
 
 <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Importer des individus</h5>
@@ -207,15 +207,26 @@
       <div class="modal-body">
         <label for="">Fichier : </label>
         <input type="file" id="fileImport" name="fileImport" accept=".xlsx, .xls, .csv"/>
-        <h3>Résultat:</h3>
+        </p>
+        <div class="alert alert-danger" role="alert">
+        <h3>Attention</h3><br/>
+          Veuillez vous assurer que le fichier comporte les colonnes <span class="text-info">NOM</span>, <span class="text-info">PRENOM</span>, <span class="text-info">EMAIL</span>, <span class="text-info">NUM</span>, <span class="text-info">ANNUAIRE</span>, et <span class="text-info">STATUT</span> (tous en majuscule).</p></p>
+        </div>
+      
+        Les <b class="text-warning">Emails non renseigné</b> ne sont pas bloquant pour l'import.</p>
+        A l'inverse les champs <b class="text-danger">Nom, Prénom, Num, Annuaire et Statut</b> le sont.</br>
+        L'annuaire et le statut auront comme valeur par défaut "APOGE" et "ETU" s'ils ne sont pas renseignés.</p>
+        <h5>Résultat:</h5>
         <table id="tableImport" class="table">
           <thead>
             <tr>
             <td>Nom</td>
             <td>Prénom</td>
-            <td>Annuaire</td>
+            <td>Email</td>
             <td>Numéro</td>
+            <td>Annuaire</td>
             <td>Statut</td>
+            <td>Existe déjà</td>
             </tr>
           </thead>
           <tbody>
@@ -253,22 +264,68 @@
       var jsonData;
       handleFile(e, function(jsonData)
       {
-        console.log(jsonData);
+        jsonObj = [];
 
-        var yourval = JSON.parse(jsonData);
-        console.error('JSON recived :',yourval);
+        $.each( jsonData, function( key, value ) {
+          var lastname = value.NOM;
+          var firstname = value.PRENOM;
+          var email = value.EMAIL;
+          var num = value.NUMERO;
+          var directory = value.ANNUAIRE;
+          var status = value.STATUT;
 
-        $('#tableImport').DataTable( {
-            data: yourval,
+          var data = 
+          "lastname=" +  lastname + 
+          "&firstname=" +  firstname + 
+          "&num=" +  num;
+
+
+          item = {}
+          item ["lastname"] = lastname ?? 'Non renseigné';
+          item ["firstname"] = firstname ?? 'Non renseigné';
+          item ["email"] = email ?? 'Non renseigné';
+          item ["num"] = num ?? 'Non renseigné';
+          item ["directory"] = directory ?? 'Non renseigné';
+          item ["status"] = status ?? 'Non renseigné';
+          item ["alreadyExist"] = status ?? 'Non renseigné';
+
+          jsonObj.push(item);
+        });
+
+        var table =  $('#tableImport').DataTable( {
+            data: jsonObj,
             columns: [
-                { data: 'Nom' },
-                { data: 'Prenom' },
-                { data: 'Email' },
-                { data: 'Annuaire' },
-                { data: 'Statut' }
+                { data: 'lastname' },
+                { data: 'firstname' },
+                { data: 'email' },
+                { data: 'num' },
+                { data: 'directory' },
+                { data: 'status' },
+                { data: 'alreadyExist' }
             ]
-        } );
-
+        });
+       
+        table.rows().every( function (rowIdx) {
+          var d = this.data();
+      
+          var i = 0;
+          $.each( d, function( key, value ) {
+              if(value == "Non renseigné")
+              {
+                var cell = table.cell({row:rowIdx, column:i}).node();
+                if(key == "email")
+                {
+                  $(cell).addClass( 'bg-warning' );
+                }
+                else
+                {
+                  $(cell).addClass( 'bg-danger' );
+                }
+              }
+              i++;
+          });
+        });
+        table.draw();
       });
     });
   })
@@ -321,7 +378,7 @@
     return $.ajax({
         url:'/People/AlreadyExist',
         type:'POST',
-        data:formData + "&numChange=" + numChange + "&lastnamOrFirstnameChange=" + lastnamOrFirstnameChange,
+        data:"_token={{ csrf_token() }}&"+ formData + "&numChange=" + numChange + "&lastnamOrFirstnameChange=" + lastnamOrFirstnameChange
     });
   }
 

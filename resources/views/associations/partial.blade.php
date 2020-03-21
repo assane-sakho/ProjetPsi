@@ -237,11 +237,11 @@
   });
 
   function checkIfExist(formData){
-        return $.ajax({
-            url:'/Associations/AlreadyExist',
-            type:'POST',
-            data: formData
-        });
+    return $.ajax({
+        url:'/Associations/AlreadyExist',
+        type:'POST',
+        data: formData
+    });
   }
   
   $('#addForm').submit(function(e){
