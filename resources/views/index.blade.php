@@ -11,10 +11,23 @@
 @section('scripts')
 
 <script>
-    setPage('Person', true);
+    setPage('', true);
 
-    function setPage(page, d)
+    function setPage(page, displayToastr_)
     {
+        var aPage = window.location.href.split('#')[1];
+        if(page == '')
+        {
+          if(aPage != "" && ["Groups", "Association", "People", "API"].includes(aPage))
+          {
+            page = aPage;
+          }
+          else
+          {
+            page = "Associations";
+          }
+        }
+
         $("nav").find("a").removeClass("active");
         $("#" + page + "Anchor").addClass("active");
 
@@ -26,13 +39,13 @@
         }
 
         switch(page){
-          case "Association" :
+          case "Associations" :
               title += " appartenances des individus aux groupes";
             break; 
-          case "Group" :
+          case "Groups" :
             title += "groupes";
             break;
-          case "Person" :
+          case "People" :
             title += "individus";
             break;
           case "API":
@@ -45,7 +58,7 @@
             url:'/' + page + '/GetPartial',
             type:'GET',
             success:function(data){
-              if(d == true)
+              if(displayToastr_ == true)
               {
                 displayToastr('loaded');
               }
@@ -105,10 +118,10 @@
       });
     }
 
-    function displayToastr(type)
+    function displayToastr(type, message)
     {
       var title = $("title").text() + " - " + "Administration";
-      var timeOut = (type == 'error') ? 2500 : 2000;
+      var timeOut = (type == 'error' || type == 'warning') ? 3000 : 2000;
 
       toastr.options = {
       timeOut : timeOut, 
@@ -131,6 +144,9 @@
           break;
         case "deleted":
           toastr.info('Les données ont été supprimés.', title);
+          break;
+        case "warning":
+          toastr.warning("<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> Attention<p/>" + message, title);
           break;
       }
     }

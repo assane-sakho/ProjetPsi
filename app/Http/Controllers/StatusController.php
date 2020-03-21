@@ -10,6 +10,6 @@ class StatusController extends Controller
     public function getStatuses()
     {
         $statuses = Status::all();
-        echo json_encode($statuses);
+        return json_encode($statuses);
     }
 }

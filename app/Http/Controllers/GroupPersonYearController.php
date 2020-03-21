@@ -12,8 +12,9 @@ class GroupPersonYearController extends Controller
     {
         $associations = GroupPersonYear::all();
       
-        return view('groupPersonYear.partial', compact('associations'));
+        return view('associations.partial', compact('associations'));
     }
+
     function add(Request $request)
     {
         $groupId = $request->input("addGroup");
@@ -21,8 +22,8 @@ class GroupPersonYearController extends Controller
         $year = $request->input("addYear");
 
         $groupe = GroupPersonYear::create(['group_id' => $groupId,'person_id' => $personId,'year' => $year]);
-        return true;
     }
+    
     function update(Request $request)
     {
         $id = $request->input("editGroupPersonYearId");

@@ -10,6 +10,6 @@ class DirectoryController extends Controller
     public function getDirectories()
     {
         $directories = Directory::all();
-        echo json_encode($directories);
+        return json_encode($directories);
     }
 }

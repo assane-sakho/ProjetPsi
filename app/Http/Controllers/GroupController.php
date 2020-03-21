@@ -11,12 +11,12 @@ class GroupController extends Controller
     {
         $groups = Group::all();
       
-        return view('group.partial', compact('groups'));
+        return view('groups.partial', compact('groups'));
     }
 
     function alreadyExist(Request $request)
     {
-        $groupeCount = Group::where(['name' => $request->input("groupeName")])->count();
+        $groupeCount = Group::where(['name' => $request->name])->count();
         if($groupeCount == 0)
             return json_encode(false);
         return json_encode(true);
@@ -25,7 +25,6 @@ class GroupController extends Controller
     function add(Request $request)
     {
         $groupe = Group::create(['name' => $request->input("groupeName")]);
-        return true;
     }
 
     function update(Request $request)
@@ -41,6 +40,5 @@ class GroupController extends Controller
         $id = $request->input("deleteId");
         $group = Group::where('id',$id);
         $group-> delete();
-        echo $id;
     }
 }

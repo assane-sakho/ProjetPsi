@@ -38,8 +38,8 @@
       <form action="" id="addForm">
         <div class="modal-body">
             @csrf
-            <b for="groupeName">Nom du groupe</label> :<br/>
-            <input type="text" name="groupeName">
+            <b for="addName">Nom du groupe</label> :<br/>
+            <input type="text" name="addName" id="addName">
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -63,6 +63,7 @@
         <div class="modal-body">
           @csrf
           <input type="hidden" name ="editId" id="editId">
+          <input type="hidden" name ="editOldName" id="editOldName">
           <label for="editName">Nom du groupe</label> : <br/>
           <input type="text" name ="editName" id="editName" class="form-control">
         </div>
@@ -88,7 +89,7 @@
         <div class="modal-body">
           @csrf
           <input type="hidden" name="deleteId" id="deleteId">
-          <span id="deleteMessage"> </span>
+          Voulez-vous supprimer <span id="deleteGroupName"></span> ?
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger">Oui</button>
@@ -102,66 +103,88 @@
 <script>
     setDataTable();
 
-    function checkIfExist(){
+    function checkIfExist(formData){
         return $.ajax({
-            url:'/Group/AlreadyExist',
+            url:'/Groups/AlreadyExist',
             type:'POST',
-            data:$("#addForm").serialize(),
+            data: formData
         });
     }
 
     $('#addForm').submit(function(e){
         e.preventDefault();
+        var formData = $("#addForm").serialize();
+        var name = $("#addName").val();
 
-        checkIfExist().then(function(response)
+        checkIfExist(formData + "&name=" +  name).then(function(response)
         {
             if (response == 'false')
             {
                 $.ajax({
-                    url:'/Group/Add',
+                    url:'/Groups/Add',
                     type:'POST',
                     data:$("#addForm").serialize(),
                     success:function(data){
                       displayToastr("saved");
-                      setPage('Group', false);
+                      setPage('Groups', false); 
                     },
                     error: function(){
                       displayToastr("error");
                     }
                 });
+                $('#addModal').modal('toggle');
+            }
+            else
+            {
+              displayToastr('warning', 'Un groupe portant le même nom existe déjà')
             }
         });
-        $('#addModal').modal('toggle');
     });
 
     $('#editForm').submit(function(e){
       e.preventDefault();
-      $.ajax({
-          url:'/Group/Update',
-          type:'POST',
-          data:$("#editForm").serialize(),
-          success:function(data){
-             displayToastr("updated");
-             setPage('Group', false);
-          },
-          error: function()
+      var formData = $("#editForm").serialize();
+      var name = $("#editName").val();
+      
+      checkIfExist(formData + "&name=" +  name).then(function(response)
+      {
+          if($("#editOldName").val() == $("#editName").val())
           {
-            displayToastr("error");
+            displayToastr('warning', 'Aucune modification n\'a été apporté.')
+          }
+          else if (response == 'false')
+          {
+            $.ajax({
+                url:'/Groups/Update',
+                type:'POST',
+                data:$("#editForm").serialize(),
+                success:function(data){
+                  displayToastr("updated");
+                  setPage('Groups', false); 
+                },
+                error: function()
+                {
+                  displayToastr("error");
+                }
+            });
+            $('#editModal').modal('toggle');
+          }
+          else
+          {
+            displayToastr('warning', 'Un groupe portant le même nom existe déjà')
           }
       });
-      $('#editModal').modal('toggle');
     });
 
     $('#deleteForm').submit(function(e){
       e.preventDefault();
       $.ajax({
-          url:'/Group/Delete',
+          url:'/Groups/Delete',
           type:'POST',
           data:$("#deleteForm").serialize(),
           success:function(data){
             displayToastr("deleted");
-            setPage('Group', false);
-          },
+            setPage('Groups', false);          },
           error: function()
           {
             displayToastr("error");
@@ -175,15 +198,15 @@
       var name = $(e.relatedTarget).data('name');
 
       $("#editId").val(id);   
-      $("#editName").val(name);   
+      $("#editOldName, #editName").val(name);   
     });
 
-    $('#deleteModal').on('show.bs.modal', function(e) {
+    $('#deleteModal').on('show.bs.modal', function(e) { 
       var id = $(e.relatedTarget).data('id');
       var name = $(e.relatedTarget).data('name');
 
       $("#deleteId").val(id);   
-      $("#deleteMessage").text("Voulez-vous supprimer le groupe " + name + " ?");
+      $("#deleteGroupName").text(name);
     });
 
 </script>

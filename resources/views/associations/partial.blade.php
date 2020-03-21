@@ -6,6 +6,7 @@
   <table class="table table-striped table-sm" id="dataTable">
     <thead>
       <tr>
+        <th>#</th>
         <th>#<br/>Groupe</th>
         <th>Nom du groupe</th>
         <th>#<br/>Individu</th>
@@ -23,6 +24,7 @@
     <tbody>
     @foreach ($associations as $association)
       <tr>
+            <td>{{ $association->id }}</td>
             <td>{{ $association->group->id }}</td>
             <td>{{ $association->group->name }}</td>
             <td>{{ $association->person->id }}</td>

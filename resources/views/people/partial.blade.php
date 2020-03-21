@@ -70,7 +70,7 @@
         @csrf
         <div class="modal-body">
           <label for="addLastname">Nom :</label></br>
-          <input type="text" name="addLastname" id="addLastName" class="form-control" required><br/>
+          <input type="text" name="addLastname" id="addLastname" class="form-control" required><br/>
 
           <label for="addFirstname">Prénom :</label></br>
           <input type="text" name="addFirstname" id="addFirstname" class="form-control" required><br/>
@@ -113,6 +113,9 @@
       </div>
       <form action="" id="editForm">
       <input type="hidden" name="editId" id="editId">
+      <input type="hidden" name="editOldNum" id="editOldNum">
+      <input type="hidden" name="editOldLastname" id="editOldLastname">
+      <input type="hidden" name="editOldFirstname" id="editOldFirstname">
         @csrf
         <div class="modal-body">
           <label for="editLastname">Nom :</label></br>
@@ -121,7 +124,7 @@
           <label for="editFirstname">Prénom :</label></br>
           <input type="text" name="editFirstname" id="editFirstname" class="form-control" required><br/>
 
-          <label for="editFirstname">Email :</label></br>
+          <label for="editEmail">Email :</label></br>
           <input type="text" name="editEmail" id="editEmail" class="form-control"><br/>
           
           <label for="editFirstname">Num :</label></br>
@@ -264,10 +267,10 @@
     var statusId = $(e.relatedTarget).data('statusid');
 
     $("#editId").val(id);
-    $("#editLastname").val(lastname);
-    $("#editFirstname").val(firstname);
+    $("#editOldLastname, #editLastname").val(lastname);
+    $("#editOldFirstname, #editFirstname").val(firstname);
     $("#editEmail").val(email);
-    $("#editNum").val(num);
+    $("#editOldNum, #editNum").val(num);
     $("#editDirectory").val(directoryId).change();
     $("#editStatus").val(statusId).change();
   });
@@ -289,65 +292,104 @@
     $("#tdDeleteStatus").text(status);
   });
 
-  function checkIfExist(){
-      return $.ajax({
-          url:'/Group/AlreadyExist',
-          type:'POST',
-          data:$("#addForm").serialize(),
-      });
+  function checkIfExist(formData, numChange, lastnamOrFirstnameChange){
+    if(numChange == false && lastnamOrFirstnameChange && false)
+    {
+      return false;
+    }
+
+    return $.ajax({
+        url:'/People/AlreadyExist',
+        type:'POST',
+        data:formData + "&numChange=" + numChange + "&lastnamOrFirstnameChange=" + lastnamOrFirstnameChange,
+    });
   }
 
   $('#addForm').submit(function(e){
-    e.preventDefault();
+      e.preventDefault();
 
-    checkIfExist().then(function(response)
-    {
-        if (response == 'false')
+      var formData = $("#addForm").serialize();
+      var lastName = $("#addLastname").val();
+      var firstName = $("#addFirstname").val();
+      var num = $("#addNum").val();
+      var data = formData + 
+      "&lastname=" +  lastName + 
+      "&firstname=" +  firstName + 
+      "&num=" +  num;
+    
+      checkIfExist(data).then(function(response){
+      if (response == 'false')
         {
             $.ajax({
-                url:'/Person/Add',
+                url:'/People/Add',
                 type:'POST',
                 data:$("#addForm").serialize(),
                 success:function(data){
                   displayToastr("saved");
-                  setPage('Person', false);
+                  setPage('People', false);
                 },
                 error: function(){
                   displayToastr("error");
                 }
             });
+            $('#addModal').modal('toggle');
+        }
+        else
+        {
+          displayToastr('warning', 'Un individu portant le même nom et prénom ou portant le même numéro existe déjà')
         }
     });
-    $('#addModal').modal('toggle');
   });
 
   $('#editForm').submit(function(e){
     e.preventDefault();
-    $.ajax({
-        url:'/Person/Update',
-        type:'POST',
-        data:$("#editForm").serialize(),
-        success:function(data){
-            displayToastr("updated");
-            setPage('Person', false);
-        },
-        error: function()
-        {
-          displayToastr("error");
-        }
+
+    var formData = $("#editForm").serialize();
+    var lastName = $("#editLastname").val();
+    var firstName = $("#editFirstname").val();
+    var num = $("#editNum").val();
+    var data = formData + 
+    "&lastname=" +  lastName + 
+    "&firstname=" +  firstName + 
+    "&num=" +  num;
+
+    var numChange =  (num != $("#editOldNum").val());
+    var lastnamOrFirstnameChange = (lastName != $("#editOldLastname").val() || firstName !=  $("#editOldFirstname").val());
+    
+      checkIfExist(data, numChange, lastnamOrFirstnameChange).then(function(response){
+      if (response == 'false' || (numChange == false && lastnamOrFirstnameChange == false))
+      {
+          $.ajax({
+              url:'/People/Update',
+              type:'POST',
+              data:$("#editForm").serialize(),
+              success:function(data){
+                displayToastr("updated");
+                setPage('People', false);
+              },
+              error: function(){
+                displayToastr("error");
+              }
+          });
+          $('#editModal').modal('toggle');
+      }
+      else
+      {
+        displayToastr('warning', 'Un individu portant le même nom et prénom ou portant le même numéro existe déjà')
+      }
     });
-    $('#editModal').modal('toggle');
+
   });
 
   $('#deleteForm').submit(function(e){
     e.preventDefault();
     $.ajax({
-        url:'/Person/Delete',
+        url:'/People/Delete',
         type:'POST',
         data:$("#deleteForm").serialize(),
         success:function(data){
           displayToastr("deleted");
-          setPage('Person', false);
+          setPage('People', false);
         },
         error: function()
         {
