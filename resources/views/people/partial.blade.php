@@ -206,17 +206,22 @@
       </div>
       <div class="modal-body">
         <label for="">Fichier : </label>
-        <input type="file" id="fileImport" name="fileImport" accept=".xlsx, .xls, .csv"/>
+        <input type="file" id="fileImport" name="fileImport" accept=".xlsx"/>
         </p>
         <div class="alert alert-danger" role="alert">
         <h3>Attention</h3><br/>
-          Veuillez vous assurer que le fichier comporte les colonnes <span class="text-info">NOM</span>, <span class="text-info">PRENOM</span>, <span class="text-info">EMAIL</span>, <span class="text-info">NUM</span>, <span class="text-info">ANNUAIRE</span>, et <span class="text-info">STATUT</span> (tous en majuscule).</p></p>
+          Veuillez vous assurer que le fichier est en .xlsx et qu'il comporte les colonnes <span class="text-info">NOM</span>, <span class="text-info">PRENOM</span>, <span class="text-info">EMAIL</span>, <span class="text-info">NUM</span>, <span class="text-info">ANNUAIRE</span>, et <span class="text-info">STATUT</span> (tout en majuscule).</p></p>
         </div>
       
         Les <b class="text-warning">Emails non renseigné</b> ne sont pas bloquant pour l'import.</p>
         A l'inverse les champs <b class="text-danger">Nom, Prénom, Num, Annuaire et Statut</b> le sont.</br>
         L'annuaire et le statut auront comme valeur par défaut "APOGE" et "ETU" s'ils ne sont pas renseignés.</p>
+        
         <h5>Résultat:</h5>
+       
+        <span id="importResult" class="text-primary"></span></br>
+        <button class="btn btn-success" id="importDataBtn">Ajouter</button></p>
+
         <table id="tableImport" class="table">
           <thead>
             <tr>
@@ -234,12 +239,12 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Importer</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
 </div>
+
 <script>
 
   $(document).ready(function()
@@ -257,13 +262,18 @@
       appendToSelect("editDirectory", JSON.parse(data));
     });
     
-    setSelect2();
-
     $('#fileImport').change(function(e)
     {
+      $("#tableImport").DataTable().clear().draw().destroy();
+
       var jsonData;
+      var i = 0, j = 0,  pourcentage = 0, totalRow = 0, countExist = 0 ;
+      var textExist;
+
       handleFile(e, function(jsonData)
       {
+        toastr.success('<div class="progress" style="height: 20px"><div id="processing" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>', 'Vérification de la présence des individus dans la base', { timeOut: 0 });
+
         jsonObj = [];
 
         $.each( jsonData, function( key, value ) {
@@ -273,13 +283,7 @@
           var num = value.NUMERO;
           var directory = value.ANNUAIRE;
           var status = value.STATUT;
-
-          var data = 
-          "lastname=" +  lastname + 
-          "&firstname=" +  firstname + 
-          "&num=" +  num;
-
-
+          
           item = {}
           item ["lastname"] = lastname ?? 'Non renseigné';
           item ["firstname"] = firstname ?? 'Non renseigné';
@@ -287,7 +291,7 @@
           item ["num"] = num ?? 'Non renseigné';
           item ["directory"] = directory ?? 'Non renseigné';
           item ["status"] = status ?? 'Non renseigné';
-          item ["alreadyExist"] = status ?? 'Non renseigné';
+          item ["alreadyExist"] = 'Recherche en cours...';
 
           jsonObj.push(item);
         });
@@ -304,27 +308,61 @@
                 { data: 'alreadyExist' }
             ]
         });
-       
+
+        totalRow = table.data().count();
         table.rows().every( function (rowIdx) {
           var d = this.data();
-      
-          var i = 0;
-          $.each( d, function( key, value ) {
-              if(value == "Non renseigné")
-              {
-                var cell = table.cell({row:rowIdx, column:i}).node();
-                if(key == "email")
+          i = 0;
+          if(i == 0)
+          {
+            doTheThing(d["lastname"], d["firstname"], d["num"])
+              .then(exist => {
+                if(exist)
                 {
-                  $(cell).addClass( 'bg-warning' );
+                  textExist = "Existe";
                 }
                 else
                 {
-                  $(cell).addClass( 'bg-danger' );
+                  textExist = "N'extiste pas";
+                  countExist++;
                 }
+                table.cell({row:rowIdx, column:6}).data(textExist);
+               
+                j++;
+                pourcentage = ((j / totalRow) * 100).toFixed();
+
+                $("#processing").text(pourcentage + " %");
+                $("#processing").css({"width" : pourcentage + "%"});
+
+                if(j == totalRow)
+                {
+                  displayToastr("checked");
+                  $("#importResult").text(countExist + " sur " + totalRow + " individus peuvent être ajouté.");
+                  if(countExist > 0)
+                  {
+                    $("#importDataBtn").show();
+                  }
+                }
+            });
+          }
+
+          $.each( d, function( key, value ) {
+            if(value == "Non renseigné")
+            {
+              var cell = table.cell({row:rowIdx, column:i}).node();
+              if(key == "email")
+              {
+                $(cell).addClass( 'bg-warning' );
               }
+              else
+              {
+                $(cell).addClass( 'bg-danger' );
+              }
+            }
               i++;
           });
         });
+
         table.draw();
       });
     });
@@ -369,6 +407,12 @@
     $("#tdDeleteStatus").text(status);
   });
 
+  $('#importModal').on('show.bs.modal', function(e) {
+    $("#importDataBtn").hide();
+    $("#importResult").text("");
+    $("#tableImport").DataTable().clear().draw().destroy();
+  });
+
   function checkIfExist(formData, numChange, lastnamOrFirstnameChange){
     if(numChange == false && lastnamOrFirstnameChange && false)
     {
@@ -380,6 +424,26 @@
         type:'POST',
         data:"_token={{ csrf_token() }}&"+ formData + "&numChange=" + numChange + "&lastnamOrFirstnameChange=" + lastnamOrFirstnameChange
     });
+  }
+
+  function doTheThing(lastname, firstname, num) {
+    return new Promise((resolve, reject) => {
+      var data = 
+            "lastname=" +  lastname + 
+            "&firstname=" +  firstname + 
+            "&num=" +  num;
+      $.ajax({
+        url:'/People/AlreadyExist',
+        type:'POST',
+        data:"_token={{ csrf_token() }}&"+ data + "&numChange=&lastnamOrFirstnameChange=",
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
   }
 
   $('#addForm').submit(function(e){
@@ -474,6 +538,36 @@
         }
     });
     $('#deleteModal').modal('toggle');
+  });
+
+  $("#importDataBtn").click(function(){
+    var table =  $('#tableImport').DataTable();
+    var data = table.rows().data();
+
+    $.each( data, function( key, value ) {
+      var alreadyExist = value.alreadyExist;
+      if(!alreadyExist)
+      {
+        var lastname = value.lastname;
+        var firstname = value.firstname;
+        var email = value.email;
+        var num = value.num;
+        var directory = value.diretory;
+        var status = value.status;
+
+        var data = 
+        "_token={{ csrf_token() }}" +
+        "&lastname=" + lastname + 
+        "&firstname=" + firstname + 
+        "&email=" + email + 
+        "&num=" + num + 
+        "&directory=" + directory +
+        "&status=" + status;
+          
+        $.post("/People/Add", data);
+      }
+    });
+
   });
 
 </script>

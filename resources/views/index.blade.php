@@ -122,7 +122,7 @@
     function displayToastr(type, message)
     {
       var title = $("title").text() + " - " + "Administration";
-      var timeOut = (type == 'error' || type == 'warning') ? 3000 : 2000;
+      var timeOut = (type == 'error' || type == 'errorMsg' || type == 'warning') ? 3000 : 2000;
 
       toastr.options = {
       timeOut : timeOut, 
@@ -148,6 +148,12 @@
           break;
         case "warning":
           toastr.warning("<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> Attention<p/>" + message, title);
+          break;
+        case "checked":
+            toastr.info('Vérification terminé', title);
+          break;
+        case "errorMsg":
+          toastr.error("<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> Attention<p/>" + message, title);
           break;
       }
     }
