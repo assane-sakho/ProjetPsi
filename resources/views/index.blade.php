@@ -11,6 +11,10 @@
 @section('scripts')
 
 <script>
+    let statusTitleArray = [];
+    let directoryNameArray = [];
+    let ajaxArray = [];
+
     setPage('', true);
 
     function setPage(page, displayToastr_)

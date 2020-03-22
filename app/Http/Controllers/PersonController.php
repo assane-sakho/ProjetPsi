@@ -60,8 +60,6 @@ class PersonController extends Controller
         $firstname = $request->input("addFirstname") ?? $request->firstname;
         $email = $request->input("addEmail") ?? $request->email;
         $num = $request->input("addNum")?? $request->num;
-        $directoryId = 1;
-        $statusId = 1;
         
         if($request->directoryName != null)
         {
