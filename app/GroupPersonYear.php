@@ -8,6 +8,7 @@ class GroupPersonYear extends Model
 {
     protected $guarded = [];
     protected $table = 'group_person_year';
+    public $timestamps = false;
 
     public function person()
     {
