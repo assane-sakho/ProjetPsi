@@ -10,7 +10,7 @@
         <th>Nom</th>
         <th>Prenom</th>
         <th>Email</th>
-        <th>Num</th>
+        <th>Numéro</th>
         <th>Annuaire</th>
         <th>Statut</th>
         <th class="not-export-col">Modifier</th>
@@ -212,6 +212,7 @@
         <div class="alert alert-danger" role="alert">
         <h3>Attention</h3><br/>
           Veuillez vous assurer que le fichier est en .xlsx et qu'il comporte les colonnes <span class="text-info">NOM</span>, <span class="text-info">PRENOM</span>, <span class="text-info">EMAIL</span>, <span class="text-info">NUMERO</span>, <span class="text-info">ANNUAIRE</span>, et <span class="text-info">STATUT</span> (tout en majuscule).</p></p>
+          <a href="{{ asset('files/importModel.xlsx') }}" download="Modele d'import d'individu.xlsx">Télécharger le modèle d'import</a></p>
           Pour rappel, la liste des annuaires et des statuts disponibles sont:</br>
           <select id="availableDirectory" class="form-control" required style="width: 400px">
           </select></p> 
