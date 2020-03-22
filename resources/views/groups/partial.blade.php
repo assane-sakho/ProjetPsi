@@ -101,7 +101,6 @@
 </div>
 
 <script>
-    setDataTable();
 
     function checkIfExist(formData){
         return $.ajax({

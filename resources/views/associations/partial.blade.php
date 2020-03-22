@@ -169,8 +169,6 @@
  
   $(document).ready(function()
   {
-    setDataTable();
-
     $.get("/People/GetAll", function(data) {
       appendToSelect("selectAddPerson", JSON.parse(data));
     });

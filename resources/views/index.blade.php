@@ -19,6 +19,9 @@
 
     function setPage(page, displayToastr_)
     {
+      $('body').loadingModal({
+        text: 'Chargement . . .'
+      });
         var aPage = window.location.href.split('#')[1];
         if(page == '')
         {
@@ -68,7 +71,9 @@
               }
               $("#content").empty();
               $("#content").append(data);
+              setDataTable();
               setSelect2();
+              $('body').loadingModal('destroy');
             },
             error : function()
             {

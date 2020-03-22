@@ -252,16 +252,12 @@
 </div>
 
 <script>
-    
 
-  $(document).ready(function()
-  {
+  $(document).ready(function(){
     statusTitleArray = [];
     directoryNameArray = [];
     ajaxArray = [];
     
-    setDataTable();
-
     $.get("/Status/GetAll", function(data) {
       appendToSelect("addStatus", JSON.parse(data));
       appendToSelect("editStatus", JSON.parse(data));
