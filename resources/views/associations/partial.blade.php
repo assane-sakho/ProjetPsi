@@ -13,7 +13,7 @@
         <th>Nom</th>
         <th>Prenom</th>
         <th>Email</th>
-        <th>Num</th>
+        <th>Numéro</th>
         <th>Annuaire</th>
         <th>Statut</th>
         <th>Année</th>

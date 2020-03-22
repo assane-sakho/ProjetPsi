@@ -40,4 +40,3 @@ Route::get('/Directory/GetAll', 'DirectoryController@getAll');
 
 /* API */
 Route::get('/API/GetPartial', 'APIController@getPartial');
-Route::get('/API/GetAssociation', 'APIController@getAssociation');
