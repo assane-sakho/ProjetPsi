@@ -8,6 +8,7 @@ class SchoolYear extends Model
 {
     protected $guarded = [];
     public $timestamps = false;
+    public $primaryKey = "year";
 
     // public function groupPersonYear()
     // {

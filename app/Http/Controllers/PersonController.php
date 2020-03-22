@@ -56,14 +56,37 @@ class PersonController extends Controller
 
     function add(Request $request)
     {
-        $lastName = $request->input("addLastname");
-        $firstName = $request->input("addFirstname");
-        $email = $request->input("addEmail");
-        $num=$request->input("addNum");
-        $idDirectory=$request->input("addDirectory");
-        $idStatus=$request->input("addStatus");
+        $lastname = $request->input("addLastname") ?? $request->lastname;
+        $firstname = $request->input("addFirstname") ?? $request->firstname;
+        $email = $request->input("addEmail") ?? $request->email;
+        $num = $request->input("addNum")?? $request->num;
+        
+        if($request->directoryName != null)
+        {
+            $directory = Directory::where("name", $request->directoryName)->first();
+            if($directory !=null)
+            {
+               $directoryId = $directory->id;
+            }
+        }
+        else
+        {
+            $directoryId=$request->input("addDirectory");
+        }
 
-        $groupe = Person::create(['lastname' => $lastName,'firstname' => $firstName,'email' => $email,'num' => $num, 'directory_id' => $idDirectory, 'status_id' => $idStatus]);
+        if($request->statusTitle != null)
+        {
+            $status = Status::where("title", $request->statusTitle)->first();
+            if($directory !=null)
+            {
+               $statusId = $status->id;
+            }
+        }
+        else
+        {
+            $statusId=$request->input("addStatus");
+        }
+        Person::create(['lastname' => $lastname,'firstname' => $firstname,'email' => $email,'num' => $num, 'directory_id' => $directoryId, 'status_id' => $statusId]);
     }
     
     function update(Request $request)
@@ -87,4 +110,9 @@ class PersonController extends Controller
         $group-> delete();
     }
 
+    public function getAll()
+    {
+        $people = Person::all();
+        return json_encode($people);
+    }
 }

@@ -11,10 +11,17 @@
 @section('scripts')
 
 <script>
+    let statusTitleArray = [];
+    let directoryNameArray = [];
+    let ajaxArray = [];
+
     setPage('', true);
 
     function setPage(page, displayToastr_)
     {
+      $('body').loadingModal({
+        text: 'Chargement . . .'
+      });
         var aPage = window.location.href.split('#')[1];
         if(page == '')
         {
@@ -64,6 +71,9 @@
               }
               $("#content").empty();
               $("#content").append(data);
+              setDataTable();
+              setSelect2();
+              $('body').loadingModal('destroy');
             },
             error : function()
             {
@@ -121,7 +131,7 @@
     function displayToastr(type, message)
     {
       var title = $("title").text() + " - " + "Administration";
-      var timeOut = (type == 'error' || type == 'warning') ? 3000 : 2000;
+      var timeOut = (type == 'error' || type == 'errorMsg' || type == 'warning') ? 3000 : 2000;
 
       toastr.options = {
       timeOut : timeOut, 
@@ -148,7 +158,50 @@
         case "warning":
           toastr.warning("<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> Attention<p/>" + message, title);
           break;
+        case "checked":
+            toastr.info('Vérification terminé', title);
+          break;
+        case "errorMsg":
+          toastr.error("<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> Attention<p/>" + message, title);
+          break;
       }
+    }
+
+    function appendToSelect(selectId, data)
+    {
+      var optionText;
+      var optionId;
+
+      $.each(data, function(key, value) { 
+        optionId = value.id;
+
+        if(value.title)
+        {
+          optionText = value.title;
+        }
+        else if(value.name)
+        {
+          optionText = value.name;
+        }
+        else if(value.year)
+        {
+          optionId = value.year;
+          optionText = value.year + " - " + (value.year+1);
+        }
+        else
+        {
+          optionText = value.firstname + " " + value.lastname;
+        }
+
+        $('#' + selectId).append($("<option></option>")
+              .attr("value",optionId)
+              .text(optionText)); 
+      });
+    }
+
+    function setSelect2()
+    {
+      $("select").select2();
     }
 </script>
 @endsection

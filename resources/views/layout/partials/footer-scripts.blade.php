@@ -12,3 +12,5 @@
 <script  src="{{ asset('js/toastr.min.js') }}"></script>
 <script  src="{{ asset('js/xlsx.core.min.js') }}"></script>
 <script  src="{{ asset('js/import.js') }}"></script>
+<script  src="{{ asset('js/select2.full.js') }}"></script>
+<script  src="{{ asset('js/jquery.loadingModal.js') }}"></script>
