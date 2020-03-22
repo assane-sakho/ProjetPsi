@@ -210,7 +210,7 @@
         </p>
         <div class="alert alert-danger" role="alert">
         <h3>Attention</h3><br/>
-          Veuillez vous assurer que le fichier est en .xlsx et qu'il comporte les colonnes <span class="text-info">NOM</span>, <span class="text-info">PRENOM</span>, <span class="text-info">EMAIL</span>, <span class="text-info">NUM</span>, <span class="text-info">ANNUAIRE</span>, et <span class="text-info">STATUT</span> (tout en majuscule).</p></p>
+          Veuillez vous assurer que le fichier est en .xlsx et qu'il comporte les colonnes <span class="text-info">NOM</span>, <span class="text-info">PRENOM</span>, <span class="text-info">EMAIL</span>, <span class="text-info">NUMERO</span>, <span class="text-info">ANNUAIRE</span>, et <span class="text-info">STATUT</span> (tout en majuscule).</p></p>
         </div>
       
         Les <b class="text-warning">Emails non renseigné</b> ne sont pas bloquant pour l'import.</p>
@@ -315,15 +315,15 @@
           i = 0;
           if(i == 0)
           {
-            doTheThing(d["lastname"], d["firstname"], d["num"])
+            checkIfExistPromise(d["lastname"], d["firstname"], d["num"])
               .then(exist => {
-                if(exist)
+                if(exist == "true")
                 {
-                  textExist = "Existe";
+                  textExist = "Oui";
                 }
                 else
                 {
-                  textExist = "N'extiste pas";
+                  textExist = "Non";
                   countExist++;
                 }
                 table.cell({row:rowIdx, column:6}).data(textExist);
@@ -426,16 +426,16 @@
     });
   }
 
-  function doTheThing(lastname, firstname, num) {
+  function checkIfExistPromise(lastname, firstname, num) {
     return new Promise((resolve, reject) => {
-      var data = 
+      var dataToSend = 
             "lastname=" +  lastname + 
             "&firstname=" +  firstname + 
             "&num=" +  num;
       $.ajax({
         url:'/People/AlreadyExist',
         type:'POST',
-        data:"_token={{ csrf_token() }}&"+ data + "&numChange=&lastnamOrFirstnameChange=",
+        data:"_token={{ csrf_token() }}&"+ dataToSend + "&numChange=&lastnamOrFirstnameChange=",
         success: function(data) {
           resolve(data)
         },
@@ -543,16 +543,16 @@
   $("#importDataBtn").click(function(){
     var table =  $('#tableImport').DataTable();
     var data = table.rows().data();
-
     $.each( data, function( key, value ) {
-      var alreadyExist = value.alreadyExist;
-      if(!alreadyExist)
+      value.alreadyExist = value.alreadyExist.replace('Oui', true).replace('Non', false);
+
+      if(value.alreadyExist == "false")
       {
         var lastname = value.lastname;
         var firstname = value.firstname;
         var email = value.email;
         var num = value.num;
-        var directory = value.diretory;
+        var directory = value.directory;
         var status = value.status;
 
         var data = 
@@ -561,13 +561,14 @@
         "&firstname=" + firstname + 
         "&email=" + email + 
         "&num=" + num + 
-        "&directory=" + directory +
-        "&status=" + status;
-          
+        "&directoryName=" + directory +
+        "&statusTitle=" + status;
         $.post("/People/Add", data);
       }
     });
-
+    $('#importModal').modal('toggle');
+    displayToastr("saved");
+    setPage('People', false);
   });
 
 </script>
