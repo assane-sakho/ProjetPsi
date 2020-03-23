@@ -206,7 +206,7 @@
       </div>
       <div class="modal-body">
         <div id="importInputDiv">
-        
+        <label for="">Fichier : </label><input type="file" id="fileImport" name="fileImport" accept=".xlsx" onchange="xlsImport(event)" onclick="$(this).val('')"/>
         </div>
         </p>
         <div class="alert alert-danger" role="alert">
@@ -263,7 +263,7 @@
       appendToSelect("addStatus", JSON.parse(data));
       appendToSelect("editStatus", JSON.parse(data));
       appendToSelect("availableStatus", JSON.parse(data));
-      $.each( JSON.parse(data), function( key, value ) {
+      $.each(JSON.parse(data), function( key, value ) {
         statusTitleArray.push(value.title);
       });
     });
@@ -318,8 +318,7 @@
     });
 
     $('#importModal').on('show.bs.modal', function(e) {
-
-      $(this).find("#importInputDiv").empty().prepend('<label for="">Fichier : </label><input type="file" id="fileImport" name="fileImport" accept=".xlsx" onchange="xlsImport(event)"/>');
+      $('#fileImport').val("");
       $("#importDataBtn").hide();
       $("#importResult").text("");
       $("#tableImport").DataTable().clear().draw().destroy();
@@ -342,8 +341,6 @@
 
     function xlsImport(e)
     {
-      console.log(statusTitleArray)
-
         $("#tableImport").DataTable().clear().draw().destroy();
 
         var jsonData;
@@ -357,20 +354,20 @@
           jsonObj = [];
 
           $.each( jsonData, function( key, value ) {
-            var lastname = value.NOM;
-            var firstname = value.PRENOM;
-            var email = value.EMAIL;
-            var num = value.NUMERO;
-            var directory = value.ANNUAIRE;
-            var status = value.STATUT;
+            var lastname = value.NOM ?? 'Non renseigné';
+            var firstname = value.PRENOM ?? 'Non renseigné';
+            var email = value.EMAIL ?? 'Non renseigné';
+            var num = value.NUMERO  ?? 'Non renseigné';
+            var directory = value.ANNUAIRE ? value.ANNUAIRE.toUpperCase() : 'Non renseigné';
+            var status = value.STATUT ? value.STATUT.toUpperCase() : 'Non renseigné';
             
             item = {}
-            item ["lastname"] = lastname ?? 'Non renseigné';
-            item ["firstname"] = firstname ?? 'Non renseigné';
-            item ["email"] = email ?? 'Non renseigné';
-            item ["num"] = num ?? 'Non renseigné';
-            item ["directory"] = directory ?? 'Non renseigné';
-            item ["status"] = status ?? 'Non renseigné';
+            item ["lastname"] = lastname;
+            item ["firstname"] = firstname;
+            item ["email"] = email;
+            item ["num"] = num;
+            item ["directory"] = directory ;
+            item ["status"] = status;
             item ["alreadyExist"] = 'Recherche en cours...';
             item ["canBeAdded"] = 'Recherche en cours...';
 
@@ -421,10 +418,12 @@
                     if(key == "directory" && !directoryNameArray.includes(value))
                     {
                       $(cell).addClass( 'bg-danger' );
+                      canBeAdded = false;
                     }
                     else if(key == "status" && !statusTitleArray.includes(value))
                     {
                       $(cell).addClass( 'bg-danger' );
+                      canBeAdded = false;
                     }
                     else if(key == "num")
                     {
@@ -567,7 +566,7 @@
       var numChange =  (num != $("#editOldNum").val());
       var lastnamOrFirstnameChange = (lastName != $("#editOldLastname").val() || firstName !=  $("#editOldFirstname").val());
       
-        checkIfExist(data, numChange, lastnamOrFirstnameChange).then(function(response){
+      checkIfExist(data, numChange, lastnamOrFirstnameChange).then(function(response){
         if (response == 'false' || (numChange == false && lastnamOrFirstnameChange == false))
         {
             $.ajax({
@@ -637,5 +636,6 @@
       });
       $('#importModal').modal('toggle');
       displayToastr("saved");
+      setPage('People', false);
     });
 </script>

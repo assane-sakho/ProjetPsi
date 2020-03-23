@@ -24,7 +24,7 @@ class GroupController extends Controller
 
     function add(Request $request)
     {
-        $groupe = Group::create(['name' => $request->input("groupeName")]);
+        $groupe = Group::create(['name' => $request->input("addName")]);
     }
 
     function update(Request $request)

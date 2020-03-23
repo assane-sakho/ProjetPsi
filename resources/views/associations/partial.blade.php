@@ -183,12 +183,12 @@
       appendToSelect("selectEditYear", JSON.parse(data));
     });
 
-    $("#selectAddYear").select2('destroy'); 
-    $('#selectAddYear').select2({
+    $("#selectAddYear, #selectEditYear").select2('destroy'); 
+    $('#selectAddYear, #selectEditYear').select2({
         tags: true,
         tokenSeparators: [",", " "],
         createTag: function (tag) {
-        if(!isNaN(tag.term) && tag.term.length == 4){
+        if(!isNaN(tag.term) && (tag.term.length == 4) && (tag.term.substring(0,2) == "20")){
           return {
               id: tag.term,
               text: tag.term + " - " + (parseInt(tag.term)+1),
