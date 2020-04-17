@@ -18,6 +18,7 @@ Route::Get('/Groups/GetAll', 'GroupController@getAll');
 Route::get('/People/GetPartial', 'PersonController@getPartial');
 Route::post('/People/AlreadyExist', 'PersonController@alreadyExist');
 Route::post('/People/Add', 'PersonController@add');
+Route::post('/People/AddFromImport', 'PersonController@addFromImport');
 Route::post('/People/Update', 'PersonController@update');
 Route::post('/People/Delete', 'PersonController@delete');
 Route::Get('/People/GetAll', 'PersonController@getAll');

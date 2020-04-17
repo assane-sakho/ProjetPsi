@@ -7,9 +7,9 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>#<br/>Groupe</th>
+        <th>#<br />Groupe</th>
         <th>Nom du groupe</th>
-        <th>#<br/>Individu</th>
+        <th>#<br />Individu</th>
         <th>Nom</th>
         <th>Prenom</th>
         <th>Email</th>
@@ -22,45 +22,32 @@
       </tr>
     </thead>
     <tbody>
-    @foreach ($associations as $association)
+      @foreach ($associations as $association)
       <tr>
-            <td>{{ $association->id }}</td>
-            <td>{{ $association->group->id }}</td>
-            <td>{{ $association->group->name }}</td>
-            <td>{{ $association->person->id }}</td>
-            <td>{{ $association->person->lastname }}</td>
-            <td>{{ $association->person->firstname }}</td>
-            <td>{{ $association->person->email ?? 'Non renseigné' }}</td>
-            <td>{{ $association->person->num }}</td>
-            <td>{{ $association->person->directory->name}}</td>
-            <td>{{ $association->person->status->title }}</td>
-            <td>{{ $association->year }} - {{ $association->year + 1 }} </td>
-            <td class="not-export-col">
-              <button class="btn btn-warning" 
-              data-toggle="modal"
-              data-target="#editModal"
-              data-id="{{ $association->id }}"
-              data-personid="{{ $association->person->id }}"
-              data-name="{{ $association->person->firstname . ' ' . $association->person->lastname }}"
-              data-groupid="{{ $association->group->id }}"
-              data-year="{{ $association->year }}">Modifier</button>
-            </td>
-            <td class="not-export-col">
-              <button class="btn btn-danger" 
-              data-toggle="modal"
-              data-target="#deleteModal"
-              data-id="{{ $association->id }}"
-              data-name="{{ $association->person->firstname .' '.$association->person->lastname }}"
-              data-year="{{ $association->year }}"
-              data-groupname="{{ $association->group->name}}">Supprimer</button>
-            </td>
+        <td>{{ $association->id }}</td>
+        <td>{{ $association->group->id }}</td>
+        <td>{{ $association->group->name }}</td>
+        <td>{{ $association->person->id }}</td>
+        <td>{{ $association->person->lastname }}</td>
+        <td>{{ $association->person->firstname }}</td>
+        <td>{{ $association->person->email ?? 'Non renseigné' }}</td>
+        <td>{{ $association->person->num }}</td>
+        <td>{{ $association->person->directory->name}}</td>
+        <td>{{ $association->person->status->title }}</td>
+        <td>{{ $association->year }} - {{ $association->year + 1 }} </td>
+        <td class="not-export-col">
+          <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="{{ $association->id }}" data-personid="{{ $association->person->id }}" data-name="{{ $association->person->firstname . ' ' . $association->person->lastname }}" data-groupid="{{ $association->group->id }}" data-year="{{ $association->year }}">Modifier</button>
+        </td>
+        <td class="not-export-col">
+          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $association->id }}" data-name="{{ $association->person->firstname .' '.$association->person->lastname }}" data-year="{{ $association->year }}" data-groupname="{{ $association->group->name}}">Supprimer</button>
+        </td>
       </tr>
-      @endforeach 
-      </tbody>
+      @endforeach
+    </tbody>
   </table>
 </div>
 
-<div class="modal fade" id="addModal"  role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,7 +59,7 @@
       <form action="" id="addForm">
         @csrf
         <div class="modal-body">
-        <label for="selectAddGroup">Groupe :</label></br>
+          <label for="selectAddGroup">Groupe :</label></br>
           <select name="selectAddGroup" id="selectAddGroup" class="form-control" required style="width: 400px">
             <option value=""> -- Sélectionnez une option -- </option>
           </select>
@@ -108,11 +95,11 @@
         </button>
       </div>
       <form action="" id="editForm">
-      <input type="hidden" name="editId" id="editId">
-      <input type="hidden" name="editPersonId" id="editPersonId">
+        <input type="hidden" name="editId" id="editId">
+        <input type="hidden" name="editPersonId" id="editPersonId">
         @csrf
         <div class="modal-body">
-        <label for="selectEditGroup">Groupe :</label></br>
+          <label for="selectEditGroup">Groupe :</label></br>
           <select name="selectEditGroup" id="selectEditGroup" class="form-control" required style="width: 400px">
             <option value=""> -- Sélectionnez une option -- </option>
           </select>
@@ -147,28 +134,25 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="" id="deleteForm">
-      <input type="hidden" name="deleteId" id="deleteId">
-        @csrf
-        <div class="modal-body">
-          Voulez-vous suppripmer l'association de <b id="deleteMessage"></b> ?
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger">Supprimer</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        </div>
-      </form>
+        <form action="" id="deleteForm">
+          <input type="hidden" name="deleteId" id="deleteId">
+          @csrf
+          <div class="modal-body">
+            Voulez-vous suppripmer l'association de <b id="deleteMessage"></b> ?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-
- 
-  $(document).ready(function()
-  {
+  $(document).ready(function() {
     $.get("/People/GetAll", function(data) {
       appendToSelect("selectAddPerson", JSON.parse(data));
     });
@@ -183,21 +167,17 @@
       appendToSelect("selectEditYear", JSON.parse(data));
     });
 
-    $("#selectAddYear, #selectEditYear").select2('destroy'); 
+    $("#selectAddYear, #selectEditYear").select2('destroy');
     $('#selectAddYear, #selectEditYear').select2({
-        tags: true,
-        tokenSeparators: [",", " "],
-        createTag: function (tag) {
-        if(!isNaN(tag.term) && (tag.term.length == 4) && (tag.term.substring(0,2) == "20")){
+      tags: true,
+      tokenSeparators: [",", " "],
+      createTag: function(tag) {
+        if (!isNaN(tag.term) && (tag.term.length == 4) && (tag.term.substring(0, 2) == "20")) {
           return {
-              id: tag.term,
-              text: tag.term + " - " + (parseInt(tag.term)+1),
-              isNew : true
+            id: tag.term,
+            text: tag.term + " - " + (parseInt(tag.term) + 1),
+            isNew: true
           };
-          }
-        else
-        {
-            
         }
       }
     });
@@ -231,56 +211,42 @@
 
     $("#deleteId").val(id);
     $("#deleteMessage").text(name + " en " + year + " pour le groupe " + groupname);
-
   });
 
-  function checkIfExist(formData){
-    return $.ajax({
-        url:'/Associations/AlreadyExist',
-        type:'POST',
-        data: formData
+  $('#addForm').submit(function(e) {
+    e.preventDefault();
+    var formData = $("#addForm").serialize();
+
+    var groupId = $("#selectAddGroup").val();
+    var personId = $("#selectAddPerson").val();
+    var year = $("#selectAddYear").val();
+
+    var data = formData +
+      "&groupId=" + groupId +
+      "&personId=" + personId +
+      "&year=" + year;
+
+    $.ajax({
+      url: '/Associations/Add',
+      type: 'POST',
+      data: formData,
+      success: function(data) {
+        $('#addModal').modal('toggle');
+        displayToastr("saved");
+        setPage('Associations', false);
+      },
+      error: function(xhr, status, error) {
+        if (xhr.responseJSON.message == 'alreadyExist') {
+          displayToastr('associationAlreadyExist');
+        } else {
+          displayToastr("error");
+        }
+      }
     });
-  }
-  
-  $('#addForm').submit(function(e){
-      e.preventDefault();
-      var formData = $("#addForm").serialize();
-    
-      var groupId = $("#selectAddGroup").val();
-      var personId = $("#selectAddPerson").val();
-      var year = $("#selectAddYear").val();
 
-      var data = formData + 
-      "&groupId=" +  groupId + 
-      "&personId=" +  personId + 
-      "&year=" +  year;
-
-      checkIfExist(data).then(function(response)
-      {
-          if (response == 'false')
-          {
-              $.ajax({
-                  url:'/Associations/Add',
-                  type:'POST',
-                  data: formData,
-                  success:function(data){
-                    displayToastr("saved");
-                    setPage('Associations', false); 
-                  },
-                  error: function(){
-                    displayToastr("error");
-                  }
-              });
-              $('#addModal').modal('toggle');
-          }
-          else
-          {
-            displayToastr('warning', 'Une association entre ce groupe, cet individu et pour l\'année sélectionnée existe déjà')
-          }
-      });
   });
 
-  $('#editForm').submit(function(e){
+  $('#editForm').submit(function(e) {
     e.preventDefault();
 
     var formData = $("#editForm").serialize();
@@ -289,52 +255,44 @@
     var personId = $("#editPersonId").val();
     var year = $("#selectEditYear").val();
 
-    var data = formData + 
-    "&groupId=" +  groupId + 
-    "&personId=" +  personId + 
-    "&year=" +  year;
-    
-    checkIfExist(data).then(function(response)
-    {
-      if (response == 'false')
-      {
-          $.ajax({
-              url:'/Associations/Update',
-              type:'POST',
-              data:formData,
-              success:function(data){
-                displayToastr("updated");
-                setPage('Associations', false);
-              },
-              error: function(){
-                displayToastr("error");
-              }
-          });
-          $('#editModal').modal('toggle');
-      }
-      else
-      {
-        displayToastr('warning', 'Une association entre ce groupe, cet individu et pour l\'année sélectionnée existe déjà')
+    var data = formData +
+      "&groupId=" + groupId +
+      "&personId=" + personId +
+      "&year=" + year;
+
+    $.ajax({
+      url: '/Associations/Update',
+      type: 'POST',
+      data: formData,
+      success: function(data) {
+        $('#editModal').modal('toggle');
+        displayToastr("updated");
+        setPage('Associations', false);
+      },
+      error: function(xhr, status, error) {
+        if (xhr.responseJSON.message == 'alreadyExist') {
+          displayToastr('associationAlreadyExist');
+        } else {
+          displayToastr("error");
+        }
       }
     });
   });
 
-  $('#deleteForm').submit(function(e){
+  $('#deleteForm').submit(function(e) {
     e.preventDefault();
     $.ajax({
-        url:'/Associations/Delete',
-        type:'POST',
-        data:$("#deleteForm").serialize(),
-        success:function(data){
-          displayToastr("deleted");
-          setPage('Associations', false);  
-        },
-        error: function()
-        {
-          displayToastr("error");
-        }
+      url: '/Associations/Delete',
+      type: 'POST',
+      data: $("#deleteForm").serialize(),
+      success: function(data) {
+        displayToastr("deleted");
+        setPage('Associations', false);
+      },
+      error: function() {
+        displayToastr("error");
+      }
     });
     $('#deleteModal').modal('toggle');
   });
-
 </script>

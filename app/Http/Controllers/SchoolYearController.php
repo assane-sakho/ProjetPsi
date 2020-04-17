@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\SchoolYear;
+use App\Helpers\SchoolYearHelper;
 
 class SchoolYearController extends Controller
 {
     public function getAll()
     {
-        $schoolYears = SchoolYear::all();
-        return json_encode($schoolYears);
+        return json_encode(SchoolYearHelper::getAll());
     }
 }

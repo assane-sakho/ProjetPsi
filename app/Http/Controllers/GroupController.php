@@ -3,48 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
+use App\Helpers\GroupHelper;
 
 class GroupController extends Controller
 {
     public function getPartial()
     {
-        $groups = Group::all();
-      
+        $groups = GroupHelper::getAll();
         return view('groups.partial', compact('groups'));
     }
 
-    function alreadyExist(Request $request)
+    public function alreadyExist(Request $request)
     {
-        $groupeCount = Group::where(['name' => $request->name])->count();
-        if($groupeCount == 0)
-            return json_encode(false);
-        return json_encode(true);
+        $name = $request->name;
+        return GroupHelper::alreadyExist($name);
     }
 
-    function add(Request $request)
+    public function add(Request $request)
     {
-        $groupe = Group::create(['name' => $request->input("addName")]);
+        $name = $request->addName;
+        return GroupHelper::tryAdd($name);
     }
 
-    function update(Request $request)
+    public function update(Request $request)
     {
         $id = $request->input("editId");
         $name = $request->input("editName");
-        $group = Group::where('id',$id);
-        $group-> update(['name' => $name]);
+
+        return GroupHelper::tryUpdate($id, $name);
     }
 
-    function delete(Request $request)
+    public function delete(Request $request)
     {
         $id = $request->input("deleteId");
-        $group = Group::where('id',$id);
-        $group-> delete();
+
+        return GroupHelper::delete($id);
     }
 
-    function getAll()
+    public function getAll()
     {
-        $groups = Group::all();
-        return json_encode($groups);
+        return json_encode(GroupHelper::getAll());
     }
 }

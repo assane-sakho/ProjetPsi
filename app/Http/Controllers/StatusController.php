@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Status;
+use App\Helpers\StatusHelper;
 
 class StatusController extends Controller
 {
     public function getAll()
     {
-        $statuses = Status::all();
-        return json_encode($statuses);
+        return json_encode(StatusHelper::getAll());
     }
 }

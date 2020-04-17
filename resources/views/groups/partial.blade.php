@@ -13,14 +13,14 @@
       </tr>
     </thead>
     <tbody>
-    @foreach ($groups as $group)
+      @foreach ($groups as $group)
       <tr>
-          <td>{{ $group->id }}</td>
-          <td>{{ $group->name }}</td>
-          <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="{{ $group->id }}" data-name="{{ $group->name }}">Modifier</button></td>
-          <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $group->id }}" data-name="{{ $group->name }}">Supprimer</button></td>
+        <td>{{ $group->id }}</td>
+        <td>{{ $group->name }}</td>
+        <td class="not-export-col"><button class="btn btn-warning" data-toggle="modal" data-target="#editModal" data-id="{{ $group->id }}" data-name="{{ $group->name }}">Modifier</button></td>
+        <td class="not-export-col"><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $group->id }}" data-name="{{ $group->name }}">Supprimer</button></td>
       </tr>
-    @endforeach
+      @endforeach
     </tbody>
   </table>
 </div>
@@ -37,9 +37,9 @@
       </div>
       <form action="" id="addForm">
         <div class="modal-body">
-            @csrf
-            <b for="addName">Nom du groupe</label> :<br/>
-            <input type="text" name="addName" id="addName">
+          @csrf
+          <b for="addName">Nom du groupe</label> :<br />
+            <input type="text" name="addName" id="addName" class="form-control">
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -62,10 +62,10 @@
       <form action="" id="editForm">
         <div class="modal-body">
           @csrf
-          <input type="hidden" name ="editId" id="editId">
-          <input type="hidden" name ="editOldName" id="editOldName">
-          <label for="editName">Nom du groupe</label> : <br/>
-          <input type="text" name ="editName" id="editName" class="form-control">
+          <input type="hidden" name="editId" id="editId">
+          <input type="hidden" name="editOldName" id="editOldName">
+          <label for="editName">Nom du groupe</label> : <br />
+          <input type="text" name="editName" id="editName" class="form-control">
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Modifier</button>
@@ -101,111 +101,85 @@
 </div>
 
 <script>
+  $('#addForm').submit(function(e) {
+    e.preventDefault();
+    var formData = $("#addForm").serialize();
+    var name = $("#addName").val();
 
-    function checkIfExist(formData){
-        return $.ajax({
-            url:'/Groups/AlreadyExist',
-            type:'POST',
-            data: formData
-        });
-    }
-
-    $('#addForm').submit(function(e){
-        e.preventDefault();
-        var formData = $("#addForm").serialize();
-        var name = $("#addName").val();
-
-        checkIfExist(formData + "&name=" +  name).then(function(response)
-        {
-            if (response == 'false')
-            {
-                $.ajax({
-                    url:'/Groups/Add',
-                    type:'POST',
-                    data:$("#addForm").serialize(),
-                    success:function(data){
-                      displayToastr("saved");
-                      setPage('Groups', false); 
-                    },
-                    error: function(){
-                      displayToastr("error");
-                    }
-                });
-                $('#addModal').modal('toggle');
-            }
-            else
-            {
-              displayToastr('warning', 'Un groupe portant le même nom existe déjà')
-            }
-        });
+    $.ajax({
+      url: '/Groups/Add',
+      type: 'POST',
+      data: $("#addForm").serialize(),
+      success: function(data) {
+        $('#addModal').modal('toggle');
+        displayToastr("saved");
+        setPage('Groups', false);
+      },
+      error: function(xhr, status, error) {
+        if (xhr.responseJSON.message == 'alreadyExist') {
+          displayToastr('groupAlreadyExist');
+        } else {
+          displayToastr("error");
+        }
+      }
     });
+  });
 
-    $('#editForm').submit(function(e){
-      e.preventDefault();
-      var formData = $("#editForm").serialize();
-      var name = $("#editName").val();
-      
-      checkIfExist(formData + "&name=" +  name).then(function(response)
-      {
-          if($("#editOldName").val() == $("#editName").val())
-          {
-            displayToastr('warning', 'Aucune modification n\'a été apporté.')
-          }
-          else if (response == 'false')
-          {
-            $.ajax({
-                url:'/Groups/Update',
-                type:'POST',
-                data:$("#editForm").serialize(),
-                success:function(data){
-                  displayToastr("updated");
-                  setPage('Groups', false); 
-                },
-                error: function()
-                {
-                  displayToastr("error");
-                }
-            });
-            $('#editModal').modal('toggle');
-          }
-          else
-          {
-            displayToastr('warning', 'Un groupe portant le même nom existe déjà')
-          }
-      });
-    });
+  $('#editForm').submit(function(e) {
+    e.preventDefault();
+    var formData = $("#editForm").serialize();
+    var name = $("#editName").val();
 
-    $('#deleteForm').submit(function(e){
-      e.preventDefault();
+    if ($("#editOldName").val() == $("#editName").val()) {
+      displayToastr('warning', 'Aucune modification n\'a été apporté.')
+    } else {
       $.ajax({
-          url:'/Groups/Delete',
-          type:'POST',
-          data:$("#deleteForm").serialize(),
-          success:function(data){
-            displayToastr("deleted");
-            setPage('Groups', false);          },
-          error: function()
-          {
-            displayToastr("error");
-          }
+        url: '/Groups/Update',
+        type: 'POST',
+        data: $("#editForm").serialize(),
+        success: function(data) {
+          $('#editModal').modal('toggle');
+          displayToastr("updated");
+          setPage('Groups', false);
+        },
+        error: function() {
+          displayToastr("error");
+          displayToastr('warning', 'Un groupe portant le même nom existe déjà')
+        }
       });
-      $('#deleteModal').modal('toggle');
+    }
+  });
+
+  $('#deleteForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: '/Groups/Delete',
+      type: 'POST',
+      data: $("#deleteForm").serialize(),
+      success: function(data) {
+        $('#deleteModal').modal('toggle');
+        displayToastr("deleted");
+        setPage('Groups', false);
+      },
+      error: function() {
+        displayToastr("error");
+      }
     });
+  });
 
-    $('#editModal').on('show.bs.modal', function(e) {
-      var id = $(e.relatedTarget).data('id');
-      var name = $(e.relatedTarget).data('name');
+  $('#editModal').on('show.bs.modal', function(e) {
+    var id = $(e.relatedTarget).data('id');
+    var name = $(e.relatedTarget).data('name');
 
-      $("#editId").val(id);   
-      $("#editOldName, #editName").val(name);   
-    });
+    $("#editId").val(id);
+    $("#editOldName, #editName").val(name);
+  });
 
-    $('#deleteModal').on('show.bs.modal', function(e) { 
-      var id = $(e.relatedTarget).data('id');
-      var name = $(e.relatedTarget).data('name');
+  $('#deleteModal').on('show.bs.modal', function(e) {
+    var id = $(e.relatedTarget).data('id');
+    var name = $(e.relatedTarget).data('name');
 
-      $("#deleteId").val(id);   
-      $("#deleteGroupName").text(name);
-    });
-
+    $("#deleteId").val(id);
+    $("#deleteGroupName").text(name);
+  });
 </script>

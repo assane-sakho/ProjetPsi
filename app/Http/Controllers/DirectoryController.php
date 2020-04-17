@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Directory;
+use App\Helpers\DirectoryHelper;
 
 class DirectoryController extends Controller
 {
     public function getAll()
     {
-        $directories = Directory::all();
-        return json_encode($directories);
+        return json_encode(DirectoryHelper::getAll());
     }
 }
