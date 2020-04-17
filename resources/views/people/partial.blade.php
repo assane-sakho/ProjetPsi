@@ -8,7 +8,7 @@
       <tr>
         <th>#</th>
         <th>Nom</th>
-        <th>Prenom</th>
+        <th>Prénom</th>
         <th>Email</th>
         <th>Numéro</th>
         <th>Annuaire</th>
