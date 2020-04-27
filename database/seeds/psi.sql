@@ -235,7 +235,7 @@ CREATE TABLE `people`  (
   `lastname` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstname` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `num` int(11) NOT NULL,
+  `num` varchar(20) NOT NULL,
   `directory_id` bigint(20) UNSIGNED NOT NULL,
   `status_id` bigint(20) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,

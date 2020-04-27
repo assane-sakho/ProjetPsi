@@ -33,7 +33,7 @@ class PersonController extends Controller
         $directory =  $request->addDirectory;
         $status =  $request->addStatus;
 
-        PersonHelper::tryAdd($lastname, $firstname, $email, $num, $directory, $status);
+        return PersonHelper::tryAdd($lastname, $firstname, $email, $num, $directory, $status);
     }
 
     function addFromImport(Request $request)
@@ -48,7 +48,7 @@ class PersonController extends Controller
         $directory_id = DirectoryHelper::getDirectoryByName($directoryName)->id;
         $status_id = StatusHelper::getStatusByTitle($statusTitle)->id;
         
-        PersonHelper::add($lastname, $firstname, $email, $num, $directory_id, $status_id);
+        return PersonHelper::add($lastname, $firstname, $email, $num, $directory_id, $status_id);
     }
 
     function update(Request $request)
@@ -61,13 +61,13 @@ class PersonController extends Controller
         $directory = $request->editDirectory;
         $status = $request->editStatus;
 
-        PersonHelper::tryUpdate($id, $lastname, $firstname, $email, $num, $directory, $status);
+        return PersonHelper::tryUpdate($id, $lastname, $firstname, $email, $num, $directory, $status);
     }
 
     function delete(Request $request)
     {
         $id = $request->deleteId;
-        PersonHelper::delete($id);
+        return PersonHelper::delete($id);
     }
 
     public function getAll()

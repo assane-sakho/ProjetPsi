@@ -18,7 +18,7 @@ class People extends Migration
             $table->string('lastname');
             $table->string('firstname');
             $table->string('email')->nullable();
-            $table->integer('num');
+            $table->string('num');
             $table->unsignedBigInteger('directory_id');
             $table->unsignedBigInteger('status_id');
 

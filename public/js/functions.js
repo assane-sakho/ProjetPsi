@@ -194,13 +194,22 @@ function displayToastr(type, message) {
                 title
             );
             break;
+        case "personAlreadyExist":
+            toastr.warning(
+                "Un individu portant le même nom et prénom ou portant le même numéro existe déjà",
+                title
+            );
+            break;
         case "groupAlreadyExist":
             toastr.warning("Un groupe portant le même nom existe déjà", title);
             break;
         case "progressBar":
             toastr.success('<div class="progress" style="height: 20px"><div id="processing" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>', 'Vérification de la présence des individus dans la base', { timeOut: 0, titleClass: title });
             break;
-}
+        case "progressBar":
+            toastr.success('<div class="progress" style="height: 20px"><div id="processing" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div></div>', 'Vérification de la présence des individus dans la base', { timeOut: 0, titleClass: title });
+            break;
+    }
 }
 
 function appendToSelect(selectId, data) {

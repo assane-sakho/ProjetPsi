@@ -11,16 +11,20 @@ class PersonHelper
         return Person::all();
     }
 
-    public static function alreadyExist($lastname, $firstname, $num)
+    public static function alreadyExist($lastname, $firstname, $num, $id = null)
     {
-        $personCount = Person::where([
-            'num' => $num
-        ])->orWhere([
+        $people =  Person::where([
             'lastname' => $lastname,
             'firstname' => $firstname
-        ])->count();
+        ])->orWhere([
+            'num' => $num
+        ])->get();
 
-        return $personCount > 0;
+        $peopleExceptCurrent = Person::where('id', '!=', $id)->get();
+
+        $intersect = $people->intersect($peopleExceptCurrent);
+
+        return ($intersect->count() >= 1);
     }
 
     public static function tryAdd($lastname, $firstname, $email, $num, $directoryId, $statusId)
@@ -47,7 +51,7 @@ class PersonHelper
 
     public static function tryUpdate($id, $lastname, $firstname, $email, $num, $directoryId, $statusId)
     {
-        if (!self::alreadyExist($lastname, $firstname, $num)) {
+        if (!self::alreadyExist($lastname, $firstname, $num, $id)) {
             self::update($id, $lastname, $firstname, $email, $num, $directoryId, $statusId);
             return ResponseHelper::returnResponseSuccess();
         } else {
@@ -62,7 +66,7 @@ class PersonHelper
             'firstname' => $firstname,
             'email' => $email,
             'num' => $num,
-            'directory_id' => $directoryId, 
+            'directory_id' => $directoryId,
             'status_id' => $statusId
         ]);
     }
