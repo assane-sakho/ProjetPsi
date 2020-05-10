@@ -6,7 +6,7 @@
     <link rel="icon" href="favicon.ico">
 
     <title>PSI Project</title>
-
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
