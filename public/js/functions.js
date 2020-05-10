@@ -59,6 +59,7 @@ function setPage(page, displayToastr_) {
             setDataTable();
             setSelect2();
             $("body").loadingModal("destroy");
+            $('.modal-backdrop').remove();
         },
         error: function () {
             displayToastr("error");
